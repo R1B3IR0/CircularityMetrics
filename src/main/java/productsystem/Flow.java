@@ -1,6 +1,7 @@
 package productsystem;
 
 public class Flow {
+    private int id;
     private String name;
     private FlowCategory category;
     private double quantity;
@@ -10,6 +11,14 @@ public class Flow {
     public Flow(String name, FlowCategory category, double quantity, UnityType unity, double cost) {
     }
 
+    public Flow() {
+    }
+
+    public int getId() {
+        return 0;
+    }
+    public void setId(int id) {
+    }
     public String getName() {
         return null;
     }

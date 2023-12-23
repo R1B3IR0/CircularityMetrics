@@ -9,6 +9,9 @@ public class Product {
     public Product(String name, int lifespan, int productUsefulness, Process process) {
     }
 
+    public Product() {
+    }
+
     public String getName() {
         return null;
     }

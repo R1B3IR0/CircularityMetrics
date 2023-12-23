@@ -1,5 +1,7 @@
 package productsystem;
 
+import java.util.List;
+
 public interface CircularityInfo {
-    public ProductList[] sendList();
+    public List<ProductList> sendList();
 }

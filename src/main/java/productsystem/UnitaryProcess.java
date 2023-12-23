@@ -1,8 +1,10 @@
 package productsystem;
 
+import java.util.List;
+
 public class UnitaryProcess extends Process {
-    private Flow[] output;
-    private Flow[] input;
+    private List<Flow> output;
+    private List<Flow> input;
     private int count;
     public UnitaryProcess(String name) {
         super(name);
@@ -11,30 +13,28 @@ public class UnitaryProcess extends Process {
     public Flow addOutput(Flow output){
         return null;
     }
-    public Flow removeOutput(Flow output){
+    public Flow removeOutput(String name){
         return null;
     }
     public Flow addInput(Flow input){
         return null;
     }
-    public Flow removeInput(Flow input){
+    public Flow removeInput(String name){
         return null;
     }
-    public Flow[] getOutput(){
+    public List<Flow> getOutput(){
         return null;
     }
-    public Flow[] getInput(){
+    public List<Flow> getInput(){
         return null;
     }
     public int getCount(){
         return 0;
     }
-    public void expandCapacity(){
-    }
-    public int findOutFlow(String name){
+    public int findOutFlow(int id){
         return 0;
     }
-    public int findInFlow(String name){
+    public int findInFlow(int id){
         return 0;
     }
 

@@ -3,54 +3,69 @@ package productsystem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AggregatedProcessTest {
 
     private AggregatedProcess ag1;
-    private AggregatedProcess ag2;
     private UnitaryProcess up1;
-    private UnitaryProcess up2;
 
 
     @BeforeEach
     void setUp() {
         ag1 = new AggregatedProcess("ag1");
-        ag2 = new AggregatedProcess("ag2");
         up1 = new UnitaryProcess("up1");
-        up2 = new UnitaryProcess("up2");
     }
 
     @Test
-    void addProcess() {
+    void addProcessTest() {
         // Case 1: addProcess() should add a UnitaryProcess to the container
-        UnitaryProcess[] expected = {up1};
         ag1.addProcess(up1);
-        UnitaryProcess[] result = ag1.getContainer();
-        assertEquals(expected, result, "addProcess() should add a UnitaryProcess to the container");
-
-        // Case 2: addProcess
-        try {
-            ag1.addProcess(null);
-            fail("addProcess() should throw an exception when adding a null UnitaryProcess");
-        } catch (IllegalArgumentException e) {
-        }
-        assertEquals(1, ag1.getCount(), "addProcess() should not add a null UnitaryProcess to the container");
-    }
-
-
-
-    @Test
-    void removeProcess() {
-    }
-
-    @Test
-    void expandCapacity() {
+        assertEquals(1, ag1.getCount(), "addProcess() should add a UnitaryProcess to the container");
 
     }
 
     @Test
-    void findUnitaryProcess() {
+    void addNullProcessTest() {
+        // Case 2: UnitaryProcess cannot be null
+        ag1.addProcess(null);
+        assertFalse(ag1.getContainer().contains(null), "Container cannot contain null");
+    }
+
+    @Test
+    void removeProcessTest() {
+        // Case 1: Count should be 0
+        ag1.addProcess(up1);
+        ag1.removeProcess(up1.getId());
+        assertEquals(0, ag1.getCount(), "removeProcess() should remove a UnitaryProcess from the container");
+    }
+
+    @Test
+    void removeNotExistingProcessTest() {
+        // Case 2: removeProcess() should return -1(because the does not exist in the container)
+        int expected = -1;
+        int result = ag1.findUnitaryProcess(expected);
+        assertEquals(expected, result, "removeProcess() should return -1(because the does not exist in the container)");
+    }
+
+    //Case 3: removeProcess() id cannot be null.
+
+    @Test
+    void findUnitaryProcessTest() {
+        //Case 1: findUnitaryProcess() should return 0.
+        ag1.addProcess(up1);
+        assertEquals(0, ag1.findUnitaryProcess(up1.getId()), "findUnitaryProcess() should return 0");
+    }
+
+    @Test
+    void NotFoundUnitaryProcessTest() {
+        //Case 2: NotFoundUnitaryProcess() should return -1.
+        ag1.findUnitaryProcess(up1.getId());
+        assertEquals(-1, ag1.findUnitaryProcess(up1.getId()), "NotFoundUnitaryProcess() should return -1");
 
     }
+
+    //Case 3: findUnitaryProcess() id cannot be null.
 }
