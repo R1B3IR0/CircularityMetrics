@@ -68,4 +68,5 @@ class AggregatedProcessTest {
     }
 
     //Case 3: findUnitaryProcess() id cannot be null.
+
 }
