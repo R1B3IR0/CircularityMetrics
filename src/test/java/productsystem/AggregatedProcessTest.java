@@ -22,23 +22,24 @@ class AggregatedProcessTest {
     @Test
     void addProcessTest() {
         // Case 1: addProcess() should add a UnitaryProcess to the container
-        ag1.addProcess(up1);
+        ag1.addUnitaryProcess(up1);
         assertEquals(1, ag1.getCount(), "addProcess() should add a UnitaryProcess to the container");
 
     }
 
     @Test
-    void addNullProcessTest() {
-        // Case 2: UnitaryProcess cannot be null
-        ag1.addProcess(null);
-        assertFalse(ag1.getContainer().contains(null), "Container cannot contain null");
+    public void addNullProcessTest() {
+        NullPointerException exception = assertThrows(NullPointerException.class, () -> ag1.addUnitaryProcess(null),
+                "Expected addUnitaryProcess to throw NullPointerException"
+        );
+        assertEquals("Unitary Process cannot be null", exception.getMessage());
     }
 
     @Test
     void removeProcessTest() {
         // Case 1: Count should be 0
-        ag1.addProcess(up1);
-        ag1.removeProcess(up1.getId());
+        ag1.addUnitaryProcess(up1);
+        ag1.removeUnitaryProcess(up1.getId());
         assertEquals(0, ag1.getCount(), "removeProcess() should remove a UnitaryProcess from the container");
     }
 
@@ -55,7 +56,7 @@ class AggregatedProcessTest {
     @Test
     void findUnitaryProcessTest() {
         //Case 1: findUnitaryProcess() should return 0.
-        ag1.addProcess(up1);
+        ag1.addUnitaryProcess(up1);
         assertEquals(0, ag1.findUnitaryProcess(up1.getId()), "findUnitaryProcess() should return 0");
     }
 
