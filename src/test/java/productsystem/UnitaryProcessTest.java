@@ -13,7 +13,7 @@ class UnitaryProcessTest {
     @BeforeEach
     void setUp() {
         up1 = new UnitaryProcess("up1");
-        f1 = new Flow();
+        f1 = new Flow("f1");
     }
 
     @Test
@@ -117,5 +117,17 @@ class UnitaryProcessTest {
         assertEquals(-1, up1.findInFlow(f1.getFlowName()), "NotFoundInFlow() should return -1");
     }
 
+    @Test
+    void testeCoberturaInstruções(){
+        up1.addFlowInput(f1);
+        up1.removeFlowInput("f1");
+
+        up1.addFlowOutput(f1);
+        up1.removeFlowOutput("f1");
+
+        assertEquals(0,up1.getCountOut());
+        assertEquals(0,up1.getCountIn());
+
+    }
     // Case 3: findInFlow() id cannot be null.
 }

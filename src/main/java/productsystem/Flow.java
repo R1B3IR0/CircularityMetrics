@@ -15,7 +15,7 @@ public class Flow {
         this.cost = cost;
     }
 
-    public Flow() {
+    public Flow(String flowName) {
 
     }
 
