@@ -32,7 +32,7 @@ public class UnitaryProcess extends Process {
         }
         int pos=findOutFlow(flowName);
         if(pos==-1){
-            throw new NoSuchElementException(flowName+"doesn't exist");
+            throw new NoSuchElementException(flowName);
         }
         Flow flow = this.output.get(pos);
         this.output.remove(pos);
@@ -51,11 +51,10 @@ public class UnitaryProcess extends Process {
     public Flow removeFlowInput(String flowName){
         if(flowName==null){
             throw new NullPointerException("Flow Name cannot be null");
-
         }
         int pos=findInFlow(flowName);
         if(pos==-1){
-            throw new NoSuchElementException(flowName+"doesn't exist");
+            throw new NoSuchElementException(flowName);
         }
         Flow flow = this.input.get(pos);
         this.input.remove(pos);
@@ -76,14 +75,14 @@ public class UnitaryProcess extends Process {
     }
     public int findOutFlow(String flowName){
         int position=0;
-        for(Flow f: this.input){
+        for(Flow f: this.output){
             if (f.getFlowName().equals(flowName)) {
                 return position;
 
             }
             position++;
         }
-        return 0;
+        return -1;
     }
     public int findInFlow(String flowName){
         int position=0;

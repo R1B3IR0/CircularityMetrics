@@ -2,18 +2,20 @@ package productsystem;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import java.util.NoSuchElementException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UnitaryProcessTest {
 
     private UnitaryProcess up1;
     private Flow f1;
+    private Flow f2;
 
     @BeforeEach
     void setUp() {
         up1 = new UnitaryProcess("up1");
-        f1 = new Flow("f1");
+        f1 = new Flow("f1",null,0,null,0);
+        f2 = new Flow("f2",null,0,null,0);
     }
 
     @Test
@@ -26,7 +28,9 @@ class UnitaryProcessTest {
     @Test
     void addNullOutputTest() {
         // Case 2: Flow cannot be null
-        assertThrows(IllegalArgumentException.class, () -> up1.addFlowOutput(null), "Flow cannot be null");
+
+        NullPointerException exception = assertThrows(NullPointerException.class, () -> up1.addFlowOutput(null), "Esperava-se que addFlowOutput lançasse NullPointerException");
+        assertEquals("Flow cannot be null", exception.getMessage());
     }
 
     @Test
@@ -38,17 +42,20 @@ class UnitaryProcessTest {
     }
 
     @Test
-    void removeNotExistingOutputTest() {
+    void findNotExistingOutputTest() {
         // Case 2: Removing a flow that doesn't exist
         String expected = "cascalho";
         int result = up1.findOutFlow(expected);
-        assertEquals(expected, result, "removeOutput() should return -1(because the does not exist in the container)");
+        assertEquals(-1, result, "removeOutput() should return -1(because the does not exist in the container)");
+
     }
 
     @Test
     void removeNullOutputTest() {
         // Case 3: removeOutput() name cannot be null.
-        assertThrows(IllegalArgumentException.class, () -> up1.removeFlowOutput(null), "Flow cannot be null");
+        NoSuchElementException exception = assertThrows(NoSuchElementException.class, () -> up1.removeFlowOutput("cascalho"),
+                "Esperava-se que removeNullOutput lançasse NoSuchElementException");
+        assertEquals("cascalho", exception.getMessage());
     }
 
     @Test
@@ -61,7 +68,8 @@ class UnitaryProcessTest {
     @Test
     void addNullInputTest() {
         // Case 2: Flow cannot be null
-        assertThrows(IllegalArgumentException.class, () -> up1.addFlowInput(null), "Flow cannot be null");
+        NullPointerException exception = assertThrows(NullPointerException.class, () -> up1.addFlowInput(null), "Esperava-se que addFlowInput lançasse NullPointerException");
+        assertEquals("Flow cannot be null", exception.getMessage());
     }
 
     @Test
@@ -73,18 +81,20 @@ class UnitaryProcessTest {
     }
 
     @Test
-    void removeNotExistingInputTest() {
+    void findNotExistingInputTest() {
         // Case 2: Removing a flow that doesn't exist
         String expected = "cascalho";
         int result = up1.findInFlow(expected);
-        assertEquals(expected, result, "removeInput() should return -1(because the does not exist in the container)");
+        assertEquals(-1, result, "findInputTest should return -1(because the does not exist in the container)");
 
     }
 
     @Test
     void removeNullInputTest() {
         // Case 3: removeInput() name cannot be null.
-        assertThrows(IllegalArgumentException.class, () -> up1.removeFlowInput(null), "Flow cannot be null");
+        NoSuchElementException exception = assertThrows(NoSuchElementException.class, () -> up1.removeFlowInput("cascalho"),
+                "Esperava-se que removeNullOutput lançasse NoSuchElementException");
+        assertEquals("cascalho", exception.getMessage());
     }
 
     @Test
@@ -118,12 +128,12 @@ class UnitaryProcessTest {
     }
 
     @Test
-    void testeCoberturaInstruções(){
+    void testeCoberturaInstrucoes(){
         up1.addFlowInput(f1);
         up1.removeFlowInput("f1");
 
-        up1.addFlowOutput(f1);
-        up1.removeFlowOutput("f1");
+        up1.addFlowOutput(f2);
+        up1.removeFlowOutput("f2");
 
         assertEquals(0,up1.getCountOut());
         assertEquals(0,up1.getCountIn());
