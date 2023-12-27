@@ -1,4 +1,4 @@
 package productsystem;
 
-public enum UnityType {
+public enum UnitType {
 }
