@@ -126,6 +126,18 @@ class UnitaryProcessTest {
         up1.findInFlow(f1.getFlowName());
         assertEquals(-1, up1.findInFlow(f1.getFlowName()), "NotFoundInFlow() should return -1");
     }
+    @Test
+    void findNullFlowInTeste(){
+        NullPointerException exception = assertThrows(NullPointerException.class,() -> up1.findInFlow(null),
+                "Espera-se que FindNullFlowInTeste lançasse NosuchElementException");
+        assertEquals(null,exception.getMessage());
+    }
+    @Test
+    void findNullFlowOutTeste(){
+        NullPointerException exception = assertThrows(NullPointerException.class,() -> up1.findOutFlow(null),
+                "Espera-se que FindNullFlowOutTeste lançasse NosuchElementException");
+        assertEquals(null,exception.getMessage());
+    }
 
     @Test
     void testeCoberturaInstrucoes(){
@@ -139,5 +151,5 @@ class UnitaryProcessTest {
         assertEquals(0,up1.getCountIn());
 
     }
-    // Case 3: findInFlow() id cannot be null.
+
 }

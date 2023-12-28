@@ -75,6 +75,9 @@ public class UnitaryProcess extends Process {
     }
     public int findOutFlow(String flowName){
         int position=0;
+        if(flowName==null){
+            throw new NullPointerException(flowName);
+        }
         for(Flow f: this.output){
             if (f.getFlowName().equals(flowName)) {
                 return position;
@@ -86,6 +89,9 @@ public class UnitaryProcess extends Process {
     }
     public int findInFlow(String flowName){
         int position=0;
+        if(flowName==null){
+            throw new NullPointerException(flowName);
+        }
         for(Flow f:this.input){
             if(f.getFlowName().equals(flowName)){
                 return position;
