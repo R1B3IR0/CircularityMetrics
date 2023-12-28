@@ -6,7 +6,7 @@ variables:
   GIT_SSL_NO_VERIFY: "true"
 before_script:
   - echo "Start Automated Build"
-  - $env:GRADLE_USER_HOME = "C:\Gradle\gradle-8.4"
+  - $env:GRADLE_USER_HOME = %CD%\.gradle
   - chmod +x ./gradlew 
 cache: 
   paths:
