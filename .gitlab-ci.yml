@@ -17,7 +17,6 @@ cache:
 my_build: 
   stage: build 
   script:
-    - *cd_chmod
     - gradle assemble 
   tags:
     - docker-runner
@@ -30,7 +29,6 @@ test_black_box:
   tags:
     - docker-runner
   script:
-    - *cd_chmod
     - gradle test
   artifacts: 
     paths:
@@ -42,7 +40,6 @@ test_white_box:
   tags:
     - docker-runner
   script:
-    - *cd_chmod
     - gradle jacocoTestReport
   artifacts: 
     paths:
