@@ -4,41 +4,50 @@ stages:
   - test 
 variables:  
   GIT_SSL_NO_VERIFY: "true"
+
 before_script:
   - echo "Start Automated Build"
-  - export GRADLE_USER_HOME=`pwd`/.gradle
-  - chmod +x ./gradlew 
+  - export GRADLE_USER_HOME='pwd'/.gradle
+
 cache: 
   paths:
     - .gradle/wrapper
     - .gradle/caches 
-build: 
+
+my_build: 
   stage: build 
   script:
-    - ./gradlew assemble 
+    - *cd_chmod
+    - gradle assemble 
   tags:
     - docker-runner
   artifacts: 
     paths:
       - build/libs/*.jar 
-    expire_in: 1 week
+
 test_black_box: 
   stage: test
   tags:
     - docker-runner
   script:
-    - ./gradlew test
+    - *cd_chmod
+    - gradle test
   artifacts: 
     paths:
       - build/test-results/test/TEST-*.xml 
+  needs: [my_build]
+
 test_white_box: 
   stage: test
   tags:
     - docker-runner
   script:
-    - ./gradlew jacocoTestReport
+    - *cd_chmod
+    - gradle jacocoTestReport
   artifacts: 
     paths:
       - build/reports/jacoco* 
+  needs: [my_build]
+
 after_script:
   - echo "End Automated Build"
