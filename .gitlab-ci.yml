@@ -19,7 +19,7 @@ my_build:
   script:
     - gradle assemble 
   tags:
-    - docker-runner
+    - docker-grupo11
   artifacts: 
     paths:
       - build/libs/*.jar 
@@ -27,7 +27,7 @@ my_build:
 test_black_box: 
   stage: test
   tags:
-    - docker-runner
+    - docker-grupo11
   script:
     - gradle test
   artifacts: 
@@ -38,7 +38,7 @@ test_black_box:
 test_white_box: 
   stage: test
   tags:
-    - docker-runner
+    - docker-grupo11
   script:
     - gradle jacocoTestReport
   artifacts: 
