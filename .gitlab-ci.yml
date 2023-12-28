@@ -6,7 +6,7 @@ variables:
   GIT_SSL_NO_VERIFY: "true"
 before_script:
   - echo "Start Automated Build"
-  - export GRADLE_USER_HOME=/.gradle
+  - export GRADLE_USER_HOME=%CD%\.Gradle
   - chmod +x ./gradlew 
 cache: 
   paths:
