@@ -25,7 +25,8 @@ test_black_box:
     tags:
       - docker-runner
     script:
-        - ./gradlew test
+        -  ./gradlew test
+        - ./gradlew jacocoTestReport     
     artifacts:
         paths:
           - build/test-results/test/TEST-*.xml
