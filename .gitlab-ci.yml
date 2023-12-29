@@ -7,6 +7,7 @@ variables:
 before_script:
   - echo "Start Automated Build"
   - export GRADLE_USER_HOME='pwd'/.gradle
+  - chmod +x ./gradlew 
 cache:
   paths:
     - .gradle/wrapper
