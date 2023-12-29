@@ -24,8 +24,8 @@ test {
 }
 
 jacoco {
-    toolVersion = "0.8.11"
-    reportsDirectory = layout.buildDirectory.dir('./reports/jacoco')
+    toolVersion = "0.8.8"
+    reportsDirectory = layout.buildDirectory.dir('./build/reports/jacoco')
 }
 
 
@@ -33,7 +33,7 @@ jacocoTestReport {
     reports {
         xml.required = false
         csv.required = false
-        html.outputLocation = layout.buildDirectory.dir('./reports/jacoco')
+        html.outputLocation = layout.buildDirectory.dir('./build/reports/jacoco')
     }
 }
 
