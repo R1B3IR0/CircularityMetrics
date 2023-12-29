@@ -16,14 +16,14 @@ build:
     script:
         - ./gradlew assemble
     tags:
-      - docker-grupo11
+      - docker-runner
     artifacts:
         paths:
         - build/libs/*.jar
 test_black_box:
     stage: test
     tags:
-      - docker-grupo11
+      - docker-runner
     script:
         - ./gradlew test
     artifacts:
@@ -33,7 +33,7 @@ test_black_box:
 test_white_box:
   stage: test
   tags:
-    - docker-grupo11
+    - docker-runner
   script:
     - ./gradlew jacocoTestReport
   artifacts:
