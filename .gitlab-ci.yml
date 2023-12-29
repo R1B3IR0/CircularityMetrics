@@ -13,8 +13,8 @@ before_script:
     }
 cache:
   paths:
-    - $(Get-Location)/.gradle/wrapper
-    - $(Get-Location)/.gradle/caches
+    - "$(Get-Location)/.gradle/wrapper"
+    - "$(Get-Location)/.gradle/caches"
 build:
   stage: build
   script:
