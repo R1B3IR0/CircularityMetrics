@@ -24,14 +24,15 @@ test {
 
 jacoco {
     toolVersion = "0.8.8"
-    reportsDiretory = layout.buildDiretory.dir('./reports/jacoco')
+    reportsDirectory = file("$buildDir/reports/jacoco") // Corrected 'reportsDirectory' and path
 }
+
 
 jacocoTestReport {
     reports {
         xml.required = false
         csv.required = false
-        html.outputLocation = layout.buildDirectory.dir('./reports/jacoco')
+        html.outputLocation = file("$buildDir/reports/jacoco") // Using 'buildDir' for output location
     }
 }
 
