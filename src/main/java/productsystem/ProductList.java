@@ -2,6 +2,7 @@ package productsystem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class ProductList {
     private List<Product> list;
@@ -27,25 +28,33 @@ public class ProductList {
     }
 
     public Product addProduct(Product product) {
-        if (this.list.add(product) == true) {
-            this.count++;
-            return product;
-        } else return null;
+        if (product == null)
+            throw new IllegalArgumentException("Product cannot be null");
+        this.count++;
+        this.list.add(product);
+        return product;
     }
 
     public Product removeProduct(String name) {
-        int index = findProduct(name);
-        if(index!=-1){
-            this.count--;
-            return this.list.remove(index);
+        int pos=findProduct(name);
+        if(pos==-1){
+            throw new NoSuchElementException("Product cannot be null");
         }
-        else return null;
+        Product product = this.list.get(pos);
+        this.list.remove(pos);
+        count--;
+        return product;
     }
 
     public int findProduct(String name) {
-        for (Product product : this.list) {
-            if (product.getName().equals(name))
-                return this.list.indexOf(product);
+        int position=0;
+        if(name==null)
+            throw new NoSuchElementException("Product cannot be null");
+        for(Product p:this.list){
+            if(p.getName().equals(name)){
+                return position;
+            }
+            position++;
         }
         return -1;
     }

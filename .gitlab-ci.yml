@@ -16,20 +16,29 @@ build:
     script:
         - ./gradlew assemble
     tags:
-      - docker-runner
+      - docker-grupo11
     artifacts:
         paths:
         - build/libs/*.jar
 test_black_box:
     stage: test
     tags:
-      - docker-runner
+      - docker-grupo11
     script:
         - ./gradlew test
     artifacts:
         paths:
           - build/test-results/test/TEST-*.xml
     needs: [build]
-
+test_white_box:
+  stage: test
+  tags:
+    - docker-grupo11
+  script:
+    - ./gradlew jacocoTestReport
+  artifacts:
+    paths:
+      - build/reports/jacoco*
+    needs: [build]
 after_script:
   - echo "End Automated Build"
