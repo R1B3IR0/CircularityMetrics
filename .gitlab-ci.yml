@@ -15,7 +15,7 @@ cache:
 build:
     stage: build
     script:
-        - ./gradlew assemble
+        - gradlew assemble
     tags:
       - docker-runner
     artifacts:
@@ -36,7 +36,7 @@ test_white_box:
   tags:
     - docker-runner
   script:
-    - ./gradlew jacocoTestReport
+    - gradlew jacocoTestReport
   artifacts:
     paths:
       - build/reports/jacoco*
