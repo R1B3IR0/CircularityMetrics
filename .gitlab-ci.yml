@@ -8,7 +8,7 @@ before_script:
   - echo "Start Automated Build"
   - |
     if ($env:CI_RUNNER_TAGS -eq "docker-grupo11") {
-      $env:GRADLE_USER_HOME = "$(Get-Location)/.gradle"
+      $env:GRADLE_USER_HOME = "$(Get-Location)\\.gradle"
       chmod +x ./gradlew
     }
 cache:
