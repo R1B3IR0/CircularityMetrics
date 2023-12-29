@@ -4,7 +4,6 @@ stages:
   - test 
 variables:  
   GIT_SSL_NO_VERIFY: "true"
-  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end"
 before_script:
   - echo "Start Automated Build"
   - export GRADLE_USER_HOME='pwd'/.gradle
@@ -42,29 +41,5 @@ test_white_box:
     paths:
       - build/reports/jacoco*
   needs: [build]
-
-checkstyle:
-  stage: build
-  script:
-    - 'mvn $MAVEN_CLI_OPTS -Pcicdprofile checkstyle:check'
-
-# PMD code quality analysis.
-pmd:
-  stage: build
-  script:
-    - 'mvn $MAVEN_CLI_OPTS -Pcicdprofile pmd:check'
-
-# SpotBugs code quality analysis.
-spotbugs:
-  stage: build
-  script:
-    - 'mvn $MAVEN_CLI_OPTS -Pcicdprofile spotbugs:check'
-
-# Test code coverage analysis.
-code-coverage:
-  stage: build
-  script:
-    - 'mvn $MAVEN_CLI_OPTS -P-Pcicdprofile install'
-
 after_script:
   - echo "End Automated Build"

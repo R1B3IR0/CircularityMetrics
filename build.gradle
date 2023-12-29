@@ -40,4 +40,5 @@ pmd {
     consoleOutput = false
     rulesMinimumPriority = 5
     ruleSetFiles = files("src/main/resources/PMD/custom-pmd-ruleset.xml")
+
 }
