@@ -39,6 +39,6 @@ test_white_box:
   artifacts:
     paths:
       - build/reports/jacoco*
-    needs: [build]
+  needs: [build]
 after_script:
   - echo "End Automated Build"
