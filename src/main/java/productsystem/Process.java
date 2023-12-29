@@ -6,20 +6,24 @@ public abstract class Process {
     private String name;
 
     public Process(String name) {
+        this.name= name;
+        this.id = nextId++;
     }
 
     public int getId() {
-        return 0;
+        return id;
     }
 
-    public void setId(int id) {
+    public static int getNextId() {
+        return  nextId;
     }
 
     public String getName() {
-        return null;
+        return name;
     }
 
     public void setName(String name) {
+        this.name=name;
     }
 
 }

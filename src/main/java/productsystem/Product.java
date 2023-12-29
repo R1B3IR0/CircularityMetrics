@@ -7,36 +7,44 @@ public class Product {
     Process process;
 
     public Product(String name, int lifespan, int productUsefulness, Process process) {
+        this.name = name;
+        this.lifespan = lifespan;
+        this.productUsefulness = productUsefulness;
+        this.process = process;
     }
 
     public Product() {
     }
 
     public String getName() {
-        return null;
+        return name;
     }
 
     public void setName(String name) {
+        this.name = name;
     }
 
     public int getLifespan() {
-        return 0;
+        return lifespan;
     }
 
     public void setLifespan(int lifespan) {
+        this.lifespan = lifespan;
     }
 
     public int getProductUsefulness() {
-        return 0;
+        return productUsefulness;
     }
 
     public void setProductUsefulness(int productUsefulness) {
+        this.productUsefulness = productUsefulness;
     }
 
     public Process getProcess() {
-        return null;
+        return process;
     }
 
     public void setProcess(Process process) {
+        this.process = process;
     }
 }
