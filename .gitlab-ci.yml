@@ -39,7 +39,7 @@ test_white_box:
     - ./gradlew jacocoTestReport
   artifacts:
     paths:
-      - build/reports/jacoco/test/html/
+      - build/reports/jacoco*
   needs: [build]
 after_script:
   - echo "End Automated Build"
