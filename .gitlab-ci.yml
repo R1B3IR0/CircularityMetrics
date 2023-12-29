@@ -13,8 +13,8 @@ before_script:
     }
 cache:
   paths:
-    - .gradle/wrapper
-    - .gradle/caches
+    - /.gradle/wrapper
+    - /.gradle/caches
 build:
   stage: build
   script:
@@ -42,7 +42,7 @@ test_white_box:
     - if ($env:CI_RUNNER_TAGS -eq "docker-grupo11") { ./gradlew jacocoTestReport }
   artifacts:
     paths:
-      - build/reports/jacoco
+      - /build/reports/jacoco
   needs: [build]
 after_script:
   - echo "End Automated Build"
