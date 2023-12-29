@@ -4,10 +4,8 @@ stages:
   - test
 variables:
   GIT_SSL_NO_VERIFY: "true"
-  GRADLE_USER_HOME: "$(pwd)/.gradle"
 before_script:
   - echo "Start Automated Build"
-  - export GRADLE_USER_HOME="$(pwd)/.gradle"
 cache:
   paths:
     - .gradle/wrapper
