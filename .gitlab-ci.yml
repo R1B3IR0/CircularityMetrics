@@ -6,11 +6,7 @@ variables:
   GIT_SSL_NO_VERIFY: "true"
 before_script:
   - echo "Start Automated Build"
-  - |
-    if [ "$CI_RUNNER_TAGS" = "docker-grupo11" ]; then
-      export GRADLE_USER_HOME=$(pwd)/.gradle
-      chmod +x ./gradlew
-    fi
+  - export GRADLE_USER_HOME=`pwd`/.gradle
 cache:
   paths:
     - .gradle/wrapper
@@ -18,7 +14,7 @@ cache:
 build:
   stage: build
   script:
-    - if [ "$CI_RUNNER_TAGS" = "docker-grupo11" ]; then ./gradlew assemble; fi
+    - ./gradlew assemble
   tags:
     - docker-grupo11
   artifacts:
@@ -29,7 +25,7 @@ test_black_box:
   tags:
     - docker-grupo11
   script:
-    - if [ "$CI_RUNNER_TAGS" = "docker-grupo11" ]; then ./gradlew test; fi
+    - ./gradlew test
   artifacts:
     paths:
       - build/test-results/test/TEST-*.xml
@@ -39,7 +35,7 @@ test_white_box:
   tags:
     - docker-grupo11
   script:
-    - if [ "$CI_RUNNER_TAGS" = "docker-grupo11" ]; then ./gradlew jacocoTestReport; fi
+    - ./gradlew jacocoTestReport
   artifacts:
     paths:
       - build/reports/jacoco*
