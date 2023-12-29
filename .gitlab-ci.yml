@@ -6,7 +6,8 @@ variables:
   GIT_SSL_NO_VERIFY: "true"
 before_script:
   - echo "Start Automated Build"
-  - export GRADLE_USER_HOME=`pwd`/.gradle
+  - export GRADLE_USER_HOME='pwd'/.gradle
+  - chmod +x ./gradlew 
 cache:
   paths:
     - .gradle/wrapper
@@ -30,6 +31,15 @@ test_black_box:
         paths:
           - build/test-results/test/TEST-*.xml
     needs: [build]
-
+test_white_box:
+  stage: test
+  tags:
+    - docker-runner
+  script:
+    - ./gradlew jacocoTestReport
+  artifacts:
+    paths:
+      - build/reports/jacoco*
+  needs: [build]
 after_script:
   - echo "End Automated Build"
