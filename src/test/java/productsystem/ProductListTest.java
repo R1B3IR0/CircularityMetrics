@@ -1,6 +1,7 @@
 package productsystem;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.NoSuchElementException;
@@ -17,6 +18,7 @@ class ProductListTest {
         p1 = new Product("p1", 1, 1, null);
     }
 
+    @Tag("addProductTest")
     @Test
     void addProductTest() {
         //Case 1: addProduct() should add a Product to the container
