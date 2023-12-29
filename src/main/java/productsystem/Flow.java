@@ -1,56 +1,61 @@
 package productsystem;
 
 public class Flow {
-    private int id;
-    private String name;
+    private String flowName;
     private FlowCategory category;
     private double quantity;
-    private UnityType unity;
+    private UnitType unit;
     private double cost;
 
-    public Flow(String name, FlowCategory category, double quantity, UnityType unity, double cost) {
+    public Flow(String flowName, FlowCategory category, double quantity, UnitType unit, double cost) {
+        this.flowName = flowName;
+        this.category = category;
+        this.quantity = quantity;
+        this.unit = unit;
+        this.cost = cost;
     }
 
-    public Flow() {
+    public Flow(String flowName) {
+
     }
 
-    public int getId() {
-        return 0;
-    }
-    public void setId(int id) {
-    }
-    public String getName() {
-        return null;
+    public String getFlowName() {
+        return flowName;
     }
 
-    public void setName(String name) {
+    public void setFlowName(String flowName) {
+        this.flowName= flowName;
     }
 
     public FlowCategory getCategory() {
-        return null;
+        return category;
     }
 
     public void setCategory(FlowCategory category) {
+        this.category= category;
     }
 
     public double getQuantity() {
-        return 0;
+        return quantity;
     }
 
     public void setQuantity(double quantity) {
+        this.quantity= quantity;
     }
 
-    public UnityType getUnity() {
-        return null;
+    public UnitType getUnit() {
+        return unit;
     }
 
-    public void setUnity(UnityType unity) {
+    public void setUnit(UnitType unit) {
+        this.unit=unit;
     }
 
     public double getCost() {
-        return 0;
+        return cost;
     }
 
     public void setCost(double cost) {
+        this.cost= cost;
     }
 }

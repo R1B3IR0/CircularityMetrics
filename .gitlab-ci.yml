@@ -1,8 +1,8 @@
 image: gradle:8.4.0-jdk17-alpine
 stages:
   - build
-  - test
-variables:
+  - test 
+variables:  
   GIT_SSL_NO_VERIFY: "true"
 before_script:
   - echo "Start Automated Build"
