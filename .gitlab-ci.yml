@@ -6,8 +6,12 @@ variables:
   GIT_SSL_NO_VERIFY: "true"
 before_script:
   - echo "Start Automated Build"
-  - export GRADLE_USER_HOME=`pwd`/.gradle
-  - chmod +x ./gradlew
+  - |
+    if [ "$CI_RUNNER_TAGS" = "docker-grupo11" ]; then
+      GRADLE_USER_HOME=$(pwd)/.gradle
+      chmod +x ./gradlew
+      export GRADLE_USER_HOME
+    fi
 cache:
   paths:
     - .gradle/wrapper
