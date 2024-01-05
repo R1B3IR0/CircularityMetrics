@@ -18,7 +18,159 @@ class MaterialListTest {
         process=new UnitaryProcess("teste");
         name="teste";
     }
+    void getMaterialNameTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method method = MaterialList.class.getDeclaredMethod("getMaterialName",Process.class);
+        method.setAccessible(true);
+        MaterialList materialList = new MaterialList();
+        double result = (double) method.invoke(materialList,process);
+        assertTrue(result >=0,"GetMaterialName.size should be more then 0");
+    }
+    void getMaterialNameProcessNullTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method method = MaterialList.class.getDeclaredMethod("getMaterialName",Process.class);
+        method.setAccessible(true);
+        MaterialList materialList = new MaterialList();
+        NullPointerException exception = assertThrows(NullPointerException.class, () -> method.invoke(materialList,null),
+                "Esperava-se que getMaterialName lançasse NullPointerException");
+        assertEquals("Process in getMaterialName cannot be null", exception.getMessage());
 
+    }
+
+
+    void getVirginMaterialTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+            Method method = MaterialList.class.getDeclaredMethod("getVirginMaterial",String.class,Process.class);
+            method.setAccessible(true);
+            MaterialList materialList = new MaterialList();
+            double result = (double) method.invoke(materialList,process,name);
+            assertTrue(result >=0,"GetVirginMaterial should be 0 or more");
+        }
+
+        void getVirginMaterialProcessNullTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+            Method method = MaterialList.class.getDeclaredMethod("getVirginMaterial",String.class,Process.class);
+            method.setAccessible(true);
+            MaterialList materialList = new MaterialList();
+            NullPointerException exception = assertThrows(NullPointerException.class, () -> method.invoke(materialList,null,name),
+                    "Esperava-se que getVirginMaterial lançasse NullPointerException");
+            assertEquals("Process in getVirginMaterial cannot be null", exception.getMessage());
+
+        }
+
+        void getVirginMaterialStringNullTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+            Method method = MaterialList.class.getDeclaredMethod("getVirginMaterial",String.class,Process.class);
+            method.setAccessible(true);
+            MaterialList materialList = new MaterialList();
+            NullPointerException exception = assertThrows(NullPointerException.class, () -> method.invoke(materialList,process,null),
+                    "Esperava-se que getVirginMaterial lançasse NullPointerException");
+            assertEquals("Name in getVirginMaterial cannot be null", exception.getMessage());
+
+        }
+        void getRecoveredMaterialTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+            Method method = MaterialList.class.getDeclaredMethod("getRecoveredMaterial",String.class,Process.class);
+            method.setAccessible(true);
+            MaterialList materialList = new MaterialList();
+            double result = (double) method.invoke(materialList,process,name);
+            assertTrue(result >=0,"GetRecoveredMaterial should be 0 or more");
+        }
+
+        void getRecoveredMaterialProcessNullTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+            Method method = MaterialList.class.getDeclaredMethod("getRecoveredMaterial",String.class,Process.class);
+            method.setAccessible(true);
+            MaterialList materialList = new MaterialList();
+            NullPointerException exception = assertThrows(NullPointerException.class, () -> method.invoke(materialList,null,name),
+                    "Esperava-se que getRecoveredMaterial lançasse NullPointerException");
+            assertEquals("Process in getRecoveredMaterial cannot be null", exception.getMessage());
+
+        }
+
+        void getRecoveredMaterialStringNullTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+            Method method = MaterialList.class.getDeclaredMethod("getRecoveredMaterial",String.class,Process.class);
+            method.setAccessible(true);
+            MaterialList materialList = new MaterialList();
+            NullPointerException exception = assertThrows(NullPointerException.class, () -> method.invoke(materialList,process,null),
+                    "Esperava-se que getRecoveredMaterial lançasse NullPointerException");
+            assertEquals("Name in getRecoveredMaterial cannot be null", exception.getMessage());
+
+        }
+    void getRecycledWasteTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method method = MaterialList.class.getDeclaredMethod("getRecycledWaste",String.class,Process.class);
+        method.setAccessible(true);
+        MaterialList materialList = new MaterialList();
+        double result = (double) method.invoke(materialList,process,name);
+        assertTrue(result >=0,"GetRecycledWaste should be 0 or more");
+    }
+
+    void getRecycledWasteProcessNullTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method method = MaterialList.class.getDeclaredMethod("getRecycledWaste",String.class,Process.class);
+        method.setAccessible(true);
+        MaterialList materialList = new MaterialList();
+        NullPointerException exception = assertThrows(NullPointerException.class, () -> method.invoke(materialList,null,name),
+                "Esperava-se que getRecycledWaste lançasse NullPointerException");
+        assertEquals("Process in getRecycledWaste cannot be null", exception.getMessage());
+
+    }
+
+    void getRecycledWasteStringNullTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method method = MaterialList.class.getDeclaredMethod("getRecycledWaste",String.class,Process.class);
+        method.setAccessible(true);
+        MaterialList materialList = new MaterialList();
+        NullPointerException exception = assertThrows(NullPointerException.class, () -> method.invoke(materialList,process,null),
+                "Esperava-se que getRecycledWaste lançasse NullPointerException");
+        assertEquals("Name in getRecycledWaste cannot be null", exception.getMessage());
+
+    }
+    void getRadioactiveWasteTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method method = MaterialList.class.getDeclaredMethod("getRadioactiveWaste",String.class,Process.class);
+        method.setAccessible(true);
+        MaterialList materialList = new MaterialList();
+        double result = (double) method.invoke(materialList,process,name);
+        assertTrue(result >=0,"GetRadioactiveWaste should be 0 or more");
+    }
+
+    void getRadioactiveWasteProcessNullTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method method = MaterialList.class.getDeclaredMethod("getRadioactiveWaste",String.class,Process.class);
+        method.setAccessible(true);
+        MaterialList materialList = new MaterialList();
+        NullPointerException exception = assertThrows(NullPointerException.class, () -> method.invoke(materialList,null,name),
+                "Esperava-se que getRadioactiveWaste lançasse NullPointerException");
+        assertEquals("Process in getRadioactiveWaste cannot be null", exception.getMessage());
+
+    }
+
+    void getRadioactiveWasteStringNullTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method method = MaterialList.class.getDeclaredMethod("getRadioactiveWaste",String.class,Process.class);
+        method.setAccessible(true);
+        MaterialList materialList = new MaterialList();
+        NullPointerException exception = assertThrows(NullPointerException.class, () -> method.invoke(materialList,process,null),
+                "Esperava-se que getRadioactiveWaste lançasse NullPointerException");
+        assertEquals("Name in getRadioactiveWaste cannot be null", exception.getMessage());
+
+    }
+    void getRecycledMaterialTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method method = MaterialList.class.getDeclaredMethod("getRecycledMaterial",String.class,Process.class);
+        method.setAccessible(true);
+        MaterialList materialList = new MaterialList();
+        double result = (double) method.invoke(materialList,process,name);
+        assertTrue(result >=0,"GetRecycledMaterial should be 0 or more");
+    }
+
+    void getRecycledMaterialProcessNullTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method method = MaterialList.class.getDeclaredMethod("getRecycledMaterial",String.class,Process.class);
+        method.setAccessible(true);
+        MaterialList materialList = new MaterialList();
+        NullPointerException exception = assertThrows(NullPointerException.class, () -> method.invoke(materialList,null,name),
+                "Esperava-se que getRecycledMaterial lançasse NullPointerException");
+        assertEquals("Process in getRecycledMaterial cannot be null", exception.getMessage());
+
+    }
+
+    void getRecycledMaterialStringNullTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method method = MaterialList.class.getDeclaredMethod("getRecycledMaterial",String.class,Process.class);
+        method.setAccessible(true);
+        MaterialList materialList = new MaterialList();
+        NullPointerException exception = assertThrows(NullPointerException.class, () -> method.invoke(materialList,process,null),
+                "Esperava-se que getRecycledMaterial lançasse NullPointerException");
+        assertEquals("Name in getRecycledMaterial cannot be null", exception.getMessage());
+
+    }
     void getMainEnergyTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Method method = MaterialList.class.getDeclaredMethod("getMainEnergy",String.class,Process.class);
         method.setAccessible(true);

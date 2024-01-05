@@ -1,8 +1,8 @@
 package CircularityIndexCalculator;
 
-import java.util.List;
-import productsystem.*;
 import productsystem.Process;
+
+import java.util.List;
 
 public class MaterialList {
     List<Material> list;
@@ -23,7 +23,7 @@ public class MaterialList {
     private double getRecycledWaste(String name,Process p){
         return 0;
     }
-    private double getRadioctiveWaste(String name,Process p){
+    private double getRadioactiveWaste(String name,Process p){
         return 0;
     }
     private double getRecycledMaterial(String name,Process p){
