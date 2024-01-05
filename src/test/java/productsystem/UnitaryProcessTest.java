@@ -14,8 +14,8 @@ class UnitaryProcessTest {
     @BeforeEach
     void setUp() {
         up1 = new UnitaryProcess("up1");
-        f1 = new Flow("f1",null,0,null,0);
-        f2 = new Flow("f2",null,0,null,0);
+        f1 = new Flow("f1","null",0,null,0);
+        f2 = new Flow("f2","null",0,null,0);
     }
 
     @Test
