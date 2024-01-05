@@ -1,4 +1,4 @@
-package CircularityIndexCalculator;
+package circularityIndexCalculator;
 
 import org.junit.jupiter.api.BeforeEach;
 import productsystem.Process;

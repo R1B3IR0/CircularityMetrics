@@ -1,4 +1,4 @@
-package CircularityIndexCalculator;
+package circularityIndexCalculator;
 
 import productsystem.Process;
 
