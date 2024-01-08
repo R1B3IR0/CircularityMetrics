@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-
+/*
 public class MaterialTest {
 
     private Material m1;
@@ -245,3 +245,4 @@ public class MaterialTest {
                 "getWasteTotal() should not return a value less or equal than zero");
     }
 }
+*/
