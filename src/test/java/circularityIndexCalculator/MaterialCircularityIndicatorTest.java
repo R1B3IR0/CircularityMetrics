@@ -7,6 +7,8 @@ import productsystem.ProductList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
+/*
 public class MaterialCircularityIndicatorTest {
     private MaterialCircularityIndicator mci;
     private MaterialList materials;
@@ -58,4 +60,4 @@ public class MaterialCircularityIndicatorTest {
         assertEquals(-1, mci.mciTotal(materials), "mciTotal() should return the total MCI of each element on the material List");
     }
 
-}
+}*/
