@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class ProductMCITest {
-    private MaterialList materials;
+    private CreateMaterials materials;
     private Product product;
     private AggregatedProcess process;
     private ProductList products;
@@ -19,7 +19,7 @@ public class ProductMCITest {
     @BeforeEach
     void setUp() {
         process = new AggregatedProcess("process");
-        materials = new MaterialList(process);
+        materials = new CreateMaterials(process);
         product = new Product("produto", process);
         products = new ProductList("products");
     }

@@ -1,6 +1,5 @@
 package circularityIndexCalculator;
 
-import productsystem.AggregatedProcess;
 import productsystem.Process;
 import productsystem.UnitaryProcess;
 
@@ -16,7 +15,7 @@ public class MaterialList {
         this.list=new ArrayList<>();
     }
 
-    private List<String> getMaterialName(Process p ) {
+    public List<String> getMaterialName(Process p ) {
         if (p == null) {
             throw new IllegalArgumentException("Process cannot be null");
         }
@@ -30,7 +29,7 @@ public class MaterialList {
         }
         return names;
     }
-    private double getVirginMaterial(String name,Process p){
+    protected double getVirginMaterial(String name, Process p){
         if(name==null){
             throw new IllegalArgumentException("Name cannot be null");
         }
@@ -44,7 +43,7 @@ public class MaterialList {
         }
         return 0;
     }
-    private double getRecoveredMaterial(String name,Process p){
+    protected double getRecoveredMaterial(String name, Process p){
         if(name==null){
             throw new IllegalArgumentException("Name cannot be null");
         }
@@ -58,7 +57,7 @@ public class MaterialList {
         }
         return 0;
     }
-    private double getRecycledWaste(String name,Process p){
+    protected double getRecycledWaste(String name, Process p){
         if(name==null){
             throw new IllegalArgumentException("Name cannot be null");
         }
@@ -72,7 +71,7 @@ public class MaterialList {
         }
         return 0;
     }
-    private double getRadioactiveWaste(String name,Process p){
+    protected double getRadioactiveWaste(String name, Process p){
         if(name==null){
             throw new IllegalArgumentException("Name cannot be null");
         }
@@ -86,7 +85,7 @@ public class MaterialList {
         }
         return 0;
     }
-    private double getRecycledMaterial(String name,Process p){
+    protected double getRecycledMaterial(String name, Process p){
         if(name==null){
             throw new IllegalArgumentException("Name cannot be null");
         }
@@ -100,7 +99,7 @@ public class MaterialList {
         }
         return 0;
     }
-    private double getMainEnergy(String name,Process p){
+    protected double getMainEnergy(String name, Process p){
         if(name==null){
             throw new IllegalArgumentException("Name cannot be null");
         }
@@ -114,7 +113,7 @@ public class MaterialList {
         }
         return 0;
     }
-    private double getSecondaryEnergy(String name,Process p){
+    protected double getSecondaryEnergy(String name, Process p){
         if(name==null){
             throw new IllegalArgumentException("Name cannot be null");
         }
@@ -128,7 +127,7 @@ public class MaterialList {
         }
         return 0;
     }
-    private double getWasteProduction(String name,Process p){
+    protected double getWasteProduction(String name, Process p){
         if(name==null){
             throw new IllegalArgumentException("Name cannot be null");
         }
@@ -142,48 +141,6 @@ public class MaterialList {
         }
         return 0;
     }
-    private Material createMaterial(String name,Process p){
-        if(name == null){
-            throw new IllegalArgumentException("Name cannot be null");
-        }
-        if(p == null){
-            throw new IllegalArgumentException("Process cannot be null");
-        }
-
-        Material material = new Material(name);
-        material.setVirginMaterial(getVirginMaterial(name,p));
-        material.setRecoveredMaterial(getRecoveredMaterial(name,p));
-        material.setWasteRadioactive(getRadioactiveWaste(name,p));
-        material.setRecycledMaterial(getRecycledMaterial(name,p));
-        material.setEnergyNeededForMainMaterial(getMainEnergy(name,p));
-        material.setEnergyNeededForSecondaryMaterial(getSecondaryEnergy(name,p));
-        material.setWasteProduction(getWasteProduction(name,p));
-        material.setRecycledMaterial(getRecycledMaterial(name,p));
-        material.setWasteOnRecycling(getRecycledWaste(name,p));
-        return material;
-
-    }
-    private void createAllMaterial(Process p){
-        if(p == null){
-            throw new IllegalArgumentException("Process cannot be null");
-        }
-        if(p instanceof UnitaryProcess){
-            for (String s:getMaterialName(p)){
-                this.list.add(createMaterial(s,p));
-            }
-        }else if(p instanceof AggregatedProcess){
-            for(UnitaryProcess un:((AggregatedProcess) p).getContainer()){
-                for (String s:getMaterialName(un)){
-                    this.list.add(createMaterial(s,un));
-                }
-            }
-        }
-    }
-    public List<Material> getMaterials(){
-        createAllMaterial(this.process);
-        return this.list;
-    }
-
 
 
 

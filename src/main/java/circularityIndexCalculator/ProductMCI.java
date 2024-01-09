@@ -8,7 +8,7 @@ import productsystem.ProductList;
  * This class calculates the MCI of a product or a list of products
  */
 public class ProductMCI {
-    public static double mciTotal(MaterialList materials) {
+    public static double mciTotal(CreateMaterials materials) {
         if (materials == null)
             throw new IllegalArgumentException("Material List cannot be null");
         double numerator = 0, denominator = 0;
@@ -25,7 +25,7 @@ public class ProductMCI {
         if (product == null)
             throw new IllegalArgumentException("Product cannot be null");
         Process process = product.getProcess();
-        MaterialList materials = new MaterialList(process);
+        CreateMaterials materials = new CreateMaterials(process);
         materials.getMaterials();
         mciTotal(materials);
     }
