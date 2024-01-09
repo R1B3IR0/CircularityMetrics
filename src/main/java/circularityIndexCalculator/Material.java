@@ -4,61 +4,35 @@ public class Material {
     private String nameMaterial;
     private double virginMaterial;
     private double recoveredMaterial;
-    private double wasteOnRecycling;
-    private double wasteRadioctive;
+    private double wasteOnMaterial;
+    private double wasteTotal;
+    private double wasteRadioactive;
     private double recycledMaterial;
-    private double energyNeededForMainMaterial;
-    private double energyNeededForSecondaryMaterial;
+    private double energyMain;
+    private double energySecondary;
     private double wasteProduction;
-    private double Lifespan;
-    private double Usefulness;
-
+    private double lifespan;
+    private double usefulness;
     private double averageUsefulness;
     private double averageLifespan;
 
-    public Material(String nameMaterial) {
+    public Material(String nameMaterial, double virginMaterial, double recoveredMaterial, double wasteOnMaterial, double wasteTotal, double wasteRadioactive, double recycledMaterial, double energyMain, double energySecondary, double wasteProduction, double lifespan, double usefulness, double averageUsefulness, double averageLifespan) {
         this.nameMaterial = nameMaterial;
+        this.virginMaterial = virginMaterial;
+        this.recoveredMaterial = recoveredMaterial;
+        this.wasteOnMaterial = wasteOnMaterial;
+        this.wasteTotal = wasteTotal;
+        this.wasteRadioactive = wasteRadioactive;
+        this.recycledMaterial = recycledMaterial;
+        this.energyMain = energyMain;
+        this.energySecondary = energySecondary;
+        this.wasteProduction = wasteProduction;
+        this.lifespan = lifespan;
+        this.usefulness = usefulness;
+        this.averageUsefulness = averageUsefulness;
+        this.averageLifespan = averageLifespan;
     }
 
-    public double getWasteTotal(){
-        return this.virginMaterial-this.recoveredMaterial;
-    }
-    public double getMass(){
-        return this.virginMaterial+getInputRecycled();
-    }
-    public double getInputRecycled(){
-        return this.recycledMaterial + this.recoveredMaterial;
-    }
-    public double getLifespan(){
-        return this.Lifespan/this.averageLifespan;
-    }
-    public double getUsefulness(){
-        return this.Usefulness/this.averageUsefulness;
-    }
-
-    public double getfX(){
-        return 0.9/((getLifespan() * getUsefulness()));
-    }
-    public double getLinearFlowIndex(){
-        double up = (2*this.virginMaterial) - this.recoveredMaterial;
-        double down = (2 * getMass())+ ((this.wasteProduction - this.wasteOnRecycling)/2);
-        return up/down;
-    }
-
-    public double getCircularityIndex(){
-        return 1-(getLinearFlowIndex()*getfX());
-    }
-
-
-
-
-
-
-
-
-
-
-    //getters and setters
     public String getNameMaterial() {
         return nameMaterial;
     }
@@ -83,20 +57,28 @@ public class Material {
         this.recoveredMaterial = recoveredMaterial;
     }
 
-    public double getWasteOnRecycling() {
-        return wasteOnRecycling;
+    public double getWasteOnMaterial() {
+        return wasteOnMaterial;
     }
 
-    public void setWasteOnRecycling(double wasteOnRecycling) {
-        this.wasteOnRecycling = wasteOnRecycling;
+    public void setWasteOnMaterial(double wasteOnMaterial) {
+        this.wasteOnMaterial = wasteOnMaterial;
     }
 
-    public double getWasteRadioctive() {
-        return wasteRadioctive;
+    public double getWasteTotal() {
+        return wasteTotal;
     }
 
-    public void setWasteRadioctive(double wasteRadioctive) {
-        this.wasteRadioctive = wasteRadioctive;
+    public void setWasteTotal() {
+        this.wasteTotal = virginMaterial - recoveredMaterial;
+    }
+
+    public double getWasteRadioactive() {
+        return wasteRadioactive;
+    }
+
+    public void setWasteRadioactive(double wasteRadioactive) {
+        this.wasteRadioactive = wasteRadioactive;
     }
 
     public double getRecycledMaterial() {
@@ -107,20 +89,20 @@ public class Material {
         this.recycledMaterial = recycledMaterial;
     }
 
-    public double getEnergyNeededForMainMaterial() {
-        return energyNeededForMainMaterial;
+    public double getEnergyMain() {
+        return energyMain;
     }
 
-    public void setEnergyNeededForMainMaterial(double energyNeededForMainMaterial) {
-        this.energyNeededForMainMaterial = energyNeededForMainMaterial;
+    public void setEnergyMain(double energyMain) {
+        this.energyMain = energyMain;
     }
 
-    public double getEnergyNeededForSecondaryMaterial() {
-        return energyNeededForSecondaryMaterial;
+    public double getEnergySecondary() {
+        return energySecondary;
     }
 
-    public void setEnergyNeededForSecondaryMaterial(double energyNeededForSecondaryMaterial) {
-        this.energyNeededForSecondaryMaterial = energyNeededForSecondaryMaterial;
+    public void setEnergySecondary(double energySecondary) {
+        this.energySecondary = energySecondary;
     }
 
     public double getWasteProduction() {
@@ -131,12 +113,20 @@ public class Material {
         this.wasteProduction = wasteProduction;
     }
 
+    public double getLifespan() {
+        return lifespan;
+    }
+
     public void setLifespan(double lifespan) {
-        Lifespan = lifespan;
+        this.lifespan = lifespan;
+    }
+
+    public double getUsefulness() {
+        return usefulness;
     }
 
     public void setUsefulness(double usefulness) {
-        Usefulness = usefulness;
+        this.usefulness = usefulness;
     }
 
     public double getAverageUsefulness() {
@@ -154,4 +144,26 @@ public class Material {
     public void setAverageLifespan(double averageLifespan) {
         this.averageLifespan = averageLifespan;
     }
+
+    public double getMass() {
+        return virginMaterial + getInputRecycled();
+    }
+
+    public double getInputRecycled() {
+        return recycledMaterial + recoveredMaterial;
+
+    }
+
+    public double getFx() {
+        return 0.9/((usefulness/averageUsefulness)*(lifespan/averageLifespan));
+    }
+
+    public double getLinearFlowIndex() {
+        return (2*virginMaterial-recoveredMaterial)/(2*getMass()+((wasteProduction-wasteOnMaterial)/2));
+    }
+
+    public double CircularityIndexP() {
+        return 1-(getLinearFlowIndex()*getFx());
+    }
+s
 }
