@@ -2,8 +2,11 @@ package productsystem;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.util.NoSuchElementException;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class UnitaryProcessTest {
 
@@ -14,15 +17,15 @@ class UnitaryProcessTest {
     @BeforeEach
     void setUp() {
         up1 = new UnitaryProcess("up1");
-        f1 = new Flow("f1","null",0,null,0);
-        f2 = new Flow("f2","null",0,null,0);
+        f1 = new Flow("f1", "null", 0, null, 0);
+        f2 = new Flow("f2", "null", 0, null, 0);
     }
 
     @Test
     void addOutputTest() {
         // Case 1: addOutput() should add a Flow to the container
         up1.addFlowOutput(f1);
-        assertEquals(1, up1.getCountOut(), "addOutput() should add a Flow to the container");
+        assertEquals(1, up1.getOutput().size(), "addOutput() should add a Flow to the container");
     }
 
     @Test
@@ -38,7 +41,7 @@ class UnitaryProcessTest {
         // Case 1: Count should be 0
         up1.addFlowOutput(f1);
         up1.removeFlowOutput(f1.getFlowName());
-        assertEquals(0, up1.getCountOut(), "removeOutput() should remove a Flow from the container");
+        assertEquals(0, up1.getOutput().size(), "removeOutput() should remove a Flow from the container");
     }
 
     @Test
@@ -62,7 +65,7 @@ class UnitaryProcessTest {
     void addInputTest() {
         // Case 1: addInput() should add a Flow to the container
         up1.addFlowInput(f1);
-        assertEquals(1, up1.getCountIn(), "addInput() should add a Flow to the container");
+        assertEquals(1, up1.getInput().size(), "addInput() should add a Flow to the container");
     }
 
     @Test
@@ -77,7 +80,7 @@ class UnitaryProcessTest {
         // Case 1: Count should be 0
         up1.addFlowInput(f1);
         up1.removeFlowInput(f1.getFlowName());
-        assertEquals(0, up1.getCountIn(), "removeInput() should remove a Flow from the container");
+        assertEquals(0, up1.getInput().size(), "removeInput() should remove a Flow from the container");
     }
 
     @Test
@@ -126,29 +129,31 @@ class UnitaryProcessTest {
         up1.findInFlow(f1.getFlowName());
         assertEquals(-1, up1.findInFlow(f1.getFlowName()), "NotFoundInFlow() should return -1");
     }
+
     @Test
-    void findNullFlowInTeste(){
-        NullPointerException exception = assertThrows(NullPointerException.class,() -> up1.findInFlow(null),
+    void findNullFlowInTeste() {
+        NullPointerException exception = assertThrows(NullPointerException.class, () -> up1.findInFlow(null),
                 "Espera-se que FindNullFlowInTeste lançasse NosuchElementException");
-        assertEquals(null,exception.getMessage());
-    }
-    @Test
-    void findNullFlowOutTeste(){
-        NullPointerException exception = assertThrows(NullPointerException.class,() -> up1.findOutFlow(null),
-                "Espera-se que FindNullFlowOutTeste lançasse NosuchElementException");
-        assertEquals(null,exception.getMessage());
+        assertEquals(null, exception.getMessage());
     }
 
     @Test
-    void testeCoberturaInstrucoes(){
+    void findNullFlowOutTeste() {
+        NullPointerException exception = assertThrows(NullPointerException.class, () -> up1.findOutFlow(null),
+                "Espera-se que FindNullFlowOutTeste lançasse NosuchElementException");
+        assertEquals(null, exception.getMessage());
+    }
+
+    @Test
+    void testeCoberturaInstrucoes() {
         up1.addFlowInput(f1);
         up1.removeFlowInput("f1");
 
         up1.addFlowOutput(f2);
         up1.removeFlowOutput("f2");
 
-        assertEquals(0,up1.getCountOut());
-        assertEquals(0,up1.getCountIn());
+        assertEquals(0, up1.getOutput().size());
+        assertEquals(0, up1.getInput().size());
 
     }
 

@@ -6,11 +6,9 @@ import java.util.NoSuchElementException;
 //subclasse de Process
 public class AggregatedProcess extends Process{
     private List<UnitaryProcess> container;//lista para armazenar Processos Unitários
-    private int count;//contador de processos
     public AggregatedProcess(String name) {
         super(name);
         this.container=new ArrayList<>();
-        this.count=0;
     }
 //método para encontrar a posição de um processo pelo seu id
     public int findUnitaryProcess(int id){
@@ -29,7 +27,6 @@ public class AggregatedProcess extends Process{
             throw new NullPointerException("Unitary Process cannot be null");
         }
         this.container.add(un);
-        count++;
         return un;
     }
 //método para remover um processo
@@ -40,16 +37,12 @@ public class AggregatedProcess extends Process{
         }
         UnitaryProcess un = this.container.get(pos);
         this.container.remove(pos);
-        count--;
+
         return un;//devolve o processo removido
     }
 
     public List<UnitaryProcess> getContainer() {
         return container;
-    }
-
-    public int getCount() {
-        return count;
     }
 }
 

@@ -4,27 +4,27 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ThreadLocalRandom;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-
-/*
 public class MaterialTest {
-
     private Material m1;
-
 
     @BeforeEach
     void setUp() {
-        m1 = new Material("m1", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0);
+        m1 = new Material("m1");
     }
-
 
     @Test
     void getValidFxTest() {
         double lifespan = ThreadLocalRandom.current().nextDouble(0.1, Double.MAX_VALUE);
         double usefulness = ThreadLocalRandom.current().nextDouble(0.1, Double.MAX_VALUE);
+        double averageLifespan = ThreadLocalRandom.current().nextDouble(0.1, Double.MAX_VALUE);
+        double AverageUsefulness = ThreadLocalRandom.current().nextDouble(0.1, Double.MAX_VALUE);
         m1.setLifespan(lifespan);
         m1.setUsefulness(usefulness);
+        m1.setAverageLifespan(averageLifespan);
+        m1.setAverageUsefulness(AverageUsefulness);
 
         double fxValue = m1.getFx();
 
@@ -33,18 +33,19 @@ public class MaterialTest {
     }
 
     @Test
-    void getZeroFxTest() {
+    void getDenominatorZeroFxTest() {
         m1.setLifespan(0); // Configura Lifespan como zero
         m1.setUsefulness(0); // Configura Usefulness como zero
-        // Act
-        double fxValue = m1.getFx();
+        m1.setAverageLifespan(1);
+        m1.setAverageUsefulness(1);
+
         // Assert
-        assertEquals( "zero cannot be divided", fxValue, "zero cannot be divided");
+        ArithmeticException exception = assertThrows(ArithmeticException.class, () -> m1.getFx(), "getFx() should not return a value equal to zero");
+        assertEquals("The product of the usefulness and lifespan cannot be zero", exception.getMessage());
     }
 
     @Test
     void getValidLinearFlowIndexTest() {
-        // Definição de  valores aleatórios para atender ao intervalo desejado (0 a 1)
         double virginMaterial = 100;
         double recoveredMaterial = 50;
         double wasteProduction = 75;
@@ -73,11 +74,11 @@ public class MaterialTest {
     }
 
     @Test
-    void getLessThenZeroLinearFlowIndexTest() {
-        double virginMaterial = -1;
-        double recoveredMaterial = -2;
-        double wasteProduction = -3;
-        double wasteOnRecycling = -4;
+    void getNegativeLinearFlowIndexTest() {
+        double virginMaterial = 1;
+        double recoveredMaterial = 4;
+        double wasteProduction = -1;
+        double wasteOnRecycling = 4;
 
         m1.setVirginMaterial(virginMaterial);
         m1.setRecoveredMaterial(recoveredMaterial);
@@ -91,14 +92,30 @@ public class MaterialTest {
     }
 
     @Test
-    void getValidCircularityIndexPTest() {
-        double linerFlowIndex = ThreadLocalRandom.current().nextDouble(0.1, Double.MAX_VALUE);
-        double fx = ThreadLocalRandom.current().nextDouble(0.1, Double.MAX_VALUE);
+    void getValidCircularityIndexTest() {
+        double lifespan = ThreadLocalRandom.current().nextDouble(0.1, Double.MAX_VALUE);
+        double usefulness = ThreadLocalRandom.current().nextDouble(0.1, Double.MAX_VALUE);
+        double averageLifespan = ThreadLocalRandom.current().nextDouble(0.1, Double.MAX_VALUE);
+        double AverageUsefulness = ThreadLocalRandom.current().nextDouble(0.1, Double.MAX_VALUE);
 
-        m1.setLinearFlowIndex(linerFlowIndex);
-        m1.setFx(fx);
+        double virginMaterial = 100;
+        double recoveredMaterial = 50;
+        double wasteProduction = 75;
+        double wasteOnRecycling = 20;
 
-        double circularityIndexValue = m1.getCircularityIndexP();
+        m1.setLifespan(lifespan);
+        m1.setUsefulness(usefulness);
+        m1.setAverageLifespan(averageLifespan);
+        m1.setAverageUsefulness(AverageUsefulness);
+        m1.setVirginMaterial(virginMaterial);
+        m1.setRecoveredMaterial(recoveredMaterial);
+        m1.setWasteProduction(wasteProduction);
+        m1.setWasteOnRecycling(wasteOnRecycling);
+
+        m1.getFx();
+        m1.getLinearFlowIndex();
+
+        double circularityIndexValue = m1.circularityIndex();
 
         assertTrue(circularityIndexValue > 0,
                 "getCircularityIndexP() should return a value greater than zero");
@@ -106,21 +123,27 @@ public class MaterialTest {
     }
 
     @Test
-    void getLessOrEqualZeroCircularityIndexPTest() {
-        double linerFlowIndex = -1;
-        double fx = -2;
+    void getNegativeOrZeroCircularityIndexTest() {
 
-        m1.setLinearFlowIndex(linerFlowIndex);
-        m1.setFx(fx);
+        m1.setLifespan(1);
+        m1.setUsefulness(1);
+        m1.setAverageLifespan(10000);
+        m1.setAverageUsefulness(10000);
+        m1.setVirginMaterial(2);
+        m1.setRecycledMaterial(2);
+        m1.setRecoveredMaterial(1);
+        m1.setWasteProduction(2);
+        m1.setWasteOnRecycling(2);
 
-        double circularityIndexValue = m1.getCircularityIndexP();
+        m1.getLinearFlowIndex();
+        m1.getFx();
 
-        assertTrue(circularityIndexValue <= 0,
-                "getCircularityIndexP() should not return a value less or equal than zero");
+        assertTrue(m1.circularityIndex() <= 0,
+                "getCircularityIndex() should not return a value less or equal than zero");
     }
 
     @Test
-    void getValidUsefullnessTest() {
+    void getValidUsefulnessTest() {
         double usefulness = ThreadLocalRandom.current().nextDouble(0.1, Double.MAX_VALUE);
         double averageUsefulness = ThreadLocalRandom.current().nextDouble(0.1, Double.MAX_VALUE);
 
@@ -134,7 +157,7 @@ public class MaterialTest {
     }
 
     @Test
-    void getLessOrEqualZeroUsefullnessTest() {
+    void getNegativeOrEqualZeroUsefulnessTest() {
         double usefulness = -10;
         double averageUsefulness = -20;
 
@@ -152,10 +175,10 @@ public class MaterialTest {
         double lifeSpan = ThreadLocalRandom.current().nextDouble(0.1, Double.MAX_VALUE);
         double averageLifeSpan = ThreadLocalRandom.current().nextDouble(0.1, Double.MAX_VALUE);
 
-        m1.setLifeSpan(lifeSpan);
-        m1.setAverageLifeSpan(averageLifeSpan);
+        m1.setLifespan(lifeSpan);
+        m1.setAverageLifespan(averageLifeSpan);
 
-        double lifeSpanValue = m1.getLifeSpan();
+        double lifeSpanValue = m1.getLifespan();
 
         assertTrue(lifeSpanValue > 0,
                 "getLifeSpan() should return a value greater than zero");
@@ -166,10 +189,10 @@ public class MaterialTest {
         double lifeSpan = -10;
         double averageLifeSpan = -20;
 
-        m1.setLifeSpan(lifeSpan);
-        m1.setAverageLifeSpan(averageLifeSpan);
+        m1.setLifespan(lifeSpan);
+        m1.setAverageLifespan(averageLifeSpan);
 
-        double lifeSpanValue = m1.getLifeSpan();
+        double lifeSpanValue = m1.getLifespan();
 
         assertTrue(lifeSpanValue <= 0,
                 "getLifeSpan() should not return a value less or equal than zero");
@@ -177,15 +200,15 @@ public class MaterialTest {
 
     @Test
     void getValidInputRecycled() {
-        double inputRecycled = 5;
-        double totalWaste = -2;
+        double recycledMaterial = 5;
+        double recoveredMaterial = 10;
 
-        m1.setInputRecycled(inputRecycled);
-        m1.setTotalWaste(totalWaste);
+        m1.setRecoveredMaterial(recoveredMaterial);
+        m1.setRecycledMaterial(recycledMaterial);
 
         double inputRecycledValue = m1.getInputRecycled();
 
-        assertTrue(inputRecycledValue > 0 | inputRecycledValue < 0,
+        assertTrue(inputRecycledValue < 0 | inputRecycledValue > 0,
                 "getInputRecycled() should return a value greater than zero");
     }
 
@@ -195,7 +218,7 @@ public class MaterialTest {
         double getInputRecycled = 5;
 
         m1.setVirginMaterial(virginMaterial);
-        m1.setInputRecycled(getInputRecycled);
+        m1.getInputRecycled();
 
         double massValue = m1.getMass();
 
@@ -209,7 +232,7 @@ public class MaterialTest {
         double getInputRecycled = 0;
 
         m1.setVirginMaterial(virginMaterial);
-        m1.setInputRecycled(getInputRecycled);
+        m1.getInputRecycled();
 
         double massValue = m1.getMass();
 
@@ -224,6 +247,7 @@ public class MaterialTest {
 
         m1.setVirginMaterial(virginMaterial);
         m1.setRecoveredMaterial(recoveredMaterial);
+        m1.setWasteTotal();
 
         double wasteTotalValue = m1.getWasteTotal();
 
@@ -245,4 +269,3 @@ public class MaterialTest {
                 "getWasteTotal() should not return a value less or equal than zero");
     }
 }
-*/
