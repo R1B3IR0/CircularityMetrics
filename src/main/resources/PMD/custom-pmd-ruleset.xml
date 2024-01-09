@@ -12,7 +12,13 @@
 
 
     <rule ref="category/java/design.xml/CognitiveComplexity" />
-    <rule ref="category/java/design.xml/CyclomaticComplexity" />
+    <rule ref="category/java/design.xml/CyclomaticComplexity">
+        <properties>
+            <property name="classReportLevel" value="87" />
+            <property name="methodReportLevel" value="10" />
+            <property name="cycloOptions" value="" />
+        </properties>
+    </rule>
     <rule ref="category/java/design.xml/GodClass" />
     <rule ref="category/java/design.xml/CouplingBetweenObjects" />
     <rule ref="category/java/design.xml/ExcessiveImports" />

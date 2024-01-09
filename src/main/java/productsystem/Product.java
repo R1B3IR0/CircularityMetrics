@@ -2,18 +2,11 @@ package productsystem;
 
 public class Product {
     private String name;
-    private int lifespan;
-    private int productUsefulness;
     Process process;
 
-    public Product(String name, int lifespan, int productUsefulness, Process process) {
+    public Product(String name, Process process) {
         this.name = name;
-        this.lifespan = lifespan;
-        this.productUsefulness = productUsefulness;
         this.process = process;
-    }
-
-    public Product() {
     }
 
     public String getName() {
@@ -22,22 +15,6 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getLifespan() {
-        return lifespan;
-    }
-
-    public void setLifespan(int lifespan) {
-        this.lifespan = lifespan;
-    }
-
-    public int getProductUsefulness() {
-        return productUsefulness;
-    }
-
-    public void setProductUsefulness(int productUsefulness) {
-        this.productUsefulness = productUsefulness;
     }
 
     public Process getProcess() {

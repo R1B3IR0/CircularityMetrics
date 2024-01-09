@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.NoSuchElementException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ProductListTest {
     private ProductList pl1;
@@ -15,7 +16,7 @@ class ProductListTest {
     @BeforeEach
     void setUp() {
         pl1 = new ProductList("pl1");
-        p1 = new Product("p1", 1, 1, null);
+        p1 = new Product("p1", null);
     }
 
     @Tag("addProductTest")
@@ -23,7 +24,7 @@ class ProductListTest {
     void addProductTest() {
         //Case 1: addProduct() should add a Product to the container
         pl1.addProduct(p1);
-        assertEquals(1, pl1.getCount(), "addProduct() should add a Product to the container");
+        assertEquals(1, pl1.getList().size(), "addProduct() should add a Product to the container");
     }
 
     @Test
@@ -34,13 +35,12 @@ class ProductListTest {
         assertEquals("Product cannot be null", exception.getMessage());
     }
 
-
     @Test
     void removeProcessTest() {
         //Case 1: Count should be 0
         pl1.addProduct(p1);
         pl1.removeProduct(p1.getName());
-        assertEquals(0, pl1.getCount(), "removeProduct() should remove a Product from the container");
+        assertEquals(0, pl1.getList().size(), "removeProduct() should remove a Product from the container");
     }
 
     @Test
@@ -83,10 +83,10 @@ class ProductListTest {
     @Test
     void testeCobertura() {
         pl1.addProduct(p1);
-        assertEquals(1, pl1.getCount(), "addProduct() should add a Product to the container");
+        assertEquals(1, pl1.getList().size(), "addProduct() should add a Product to the container");
         pl1.removeProduct(p1.getName());
-        assertEquals(0, pl1.getCount(), "removeProduct() should remove a Product from the container");
+        assertEquals(0, pl1.getList().size(), "removeProduct() should remove a Product from the container");
         pl1.findProduct(p1.getName());
-        assertEquals(-1, pl1.findProduct(p1.getName()),"findProduct() should return -1");
+        assertEquals(-1, pl1.findProduct(p1.getName()), "findProduct() should return -1");
     }
 }

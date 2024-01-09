@@ -27,7 +27,7 @@ class AggregatedProcessTest {
     void addProcessTest() {
         // Caso 1: addUnitaryProcess() deve adicionar um UnitaryProcess ao container
         ag1.addUnitaryProcess(up1);
-        assertEquals(1, ag1.getCount(), "addUnitaryProcess() deve adicionar um UnitaryProcess ao container");
+        assertEquals(1, ag1.getContainer().size(), "addUnitaryProcess() deve adicionar um UnitaryProcess ao container");
     }
 
     // Teste para adicionar um UnitaryProcess nulo
@@ -45,7 +45,7 @@ class AggregatedProcessTest {
         // Caso 1: Contagem deve ser 0
         ag1.addUnitaryProcess(up1);
         ag1.removeUnitaryProcess(up1.getId());
-        assertEquals(0, ag1.getCount(), "removeUnitaryProcess() deve remover um UnitaryProcess do container");
+        assertEquals(0, ag1.getContainer().size(), "removeUnitaryProcess() deve remover um UnitaryProcess do container");
     }
 
     // Teste para remover um UnitaryProcess que não existe
@@ -75,16 +75,12 @@ class AggregatedProcessTest {
         assertEquals(-1, ag1.findUnitaryProcess(up1.getId()), "NotFoundUnitaryProcess() deve retornar -1");
     }
 
-
-
-
-
     // Teste para o método addUnitaryProcess
     @Test
     public void testAddUnitaryProcess() {
-        assertEquals(0, ag1.getCount());
+        assertEquals(0, ag1.getContainer().size());
         ag1.addUnitaryProcess(up1);
-        assertEquals(1, ag1.getCount());
+        assertEquals(1, ag1.getContainer().size());
         assertEquals(up1, ag1.getContainer().get(0));
     }
 
@@ -94,11 +90,11 @@ class AggregatedProcessTest {
         ag1.addUnitaryProcess(up1);
         ag1.addUnitaryProcess(up2);
 
-        assertEquals(2, ag1.getCount());
+        assertEquals(2, ag1.getContainer().size());
 
         UnitaryProcess removedProcess = ag1.removeUnitaryProcess(up1.getId());
 
-        assertEquals(1, ag1.getCount());
+        assertEquals(1, ag1.getContainer().size());
         assertEquals(up1, removedProcess);
     }
 

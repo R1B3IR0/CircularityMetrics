@@ -7,11 +7,10 @@ import java.util.NoSuchElementException;
 public class ProductList {
     private List<Product> list;
     private String name;
-    private int count;
 
     public ProductList(String name) {
         this.name = name;
-        this.count = 0;
+
         this.list = new ArrayList<>();
     }
 
@@ -23,16 +22,14 @@ public class ProductList {
         this.name = name;
     }
 
-    public int getCount() {
-        return this.count;
-    }
-
     public Product addProduct(Product product) {
         if (product == null)
             throw new IllegalArgumentException("Product cannot be null");
-        this.count++;
         this.list.add(product);
         return product;
+    }
+    public List<Product> getList() {
+        return list;
     }
 
     public Product removeProduct(String name) {
@@ -42,7 +39,6 @@ public class ProductList {
         }
         Product product = this.list.get(pos);
         this.list.remove(pos);
-        count--;
         return product;
     }
 

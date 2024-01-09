@@ -4,33 +4,33 @@ public class Material {
     private String nameMaterial;
     private double virginMaterial;
     private double recoveredMaterial;
-    private double wasteOnMaterial;
+    private double wasteOnRecycling;
     private double wasteTotal;
     private double wasteRadioactive;
     private double recycledMaterial;
-    private double energyMain;
-    private double energySecondary;
+    private double energyNeededForMainMaterial;
+    private double energyNeededForSecondaryMaterial;
     private double wasteProduction;
     private double lifespan;
     private double usefulness;
     private double averageUsefulness;
     private double averageLifespan;
 
-    public Material(String nameMaterial, double virginMaterial, double recoveredMaterial, double wasteOnMaterial, double wasteTotal, double wasteRadioactive, double recycledMaterial, double energyMain, double energySecondary, double wasteProduction, double lifespan, double usefulness, double averageUsefulness, double averageLifespan) {
+    public Material(String nameMaterial) {
         this.nameMaterial = nameMaterial;
-        this.virginMaterial = virginMaterial;
-        this.recoveredMaterial = recoveredMaterial;
-        this.wasteOnMaterial = wasteOnMaterial;
-        this.wasteTotal = wasteTotal;
-        this.wasteRadioactive = wasteRadioactive;
-        this.recycledMaterial = recycledMaterial;
-        this.energyMain = energyMain;
-        this.energySecondary = energySecondary;
-        this.wasteProduction = wasteProduction;
-        this.lifespan = lifespan;
-        this.usefulness = usefulness;
-        this.averageUsefulness = averageUsefulness;
-        this.averageLifespan = averageLifespan;
+        this.virginMaterial = 0;
+        this.recoveredMaterial = 0;
+        this.wasteOnRecycling = 0;
+        this.wasteTotal = 0;
+        this.wasteRadioactive = 0;
+        this.recycledMaterial = 0;
+        this.energyNeededForMainMaterial = 0;
+        this.energyNeededForSecondaryMaterial = 0;
+        this.wasteProduction = 0;
+        this.lifespan = 0;
+        this.usefulness = 0;
+        this.averageUsefulness = 0;
+        this.averageLifespan = 0;
     }
 
     public String getNameMaterial() {
@@ -57,12 +57,12 @@ public class Material {
         this.recoveredMaterial = recoveredMaterial;
     }
 
-    public double getWasteOnMaterial() {
-        return wasteOnMaterial;
+    public double getWasteOnRecycling() {
+        return wasteOnRecycling;
     }
 
-    public void setWasteOnMaterial(double wasteOnMaterial) {
-        this.wasteOnMaterial = wasteOnMaterial;
+    public void setWasteOnRecycling(double wasteOnRecycling) {
+        this.wasteOnRecycling = wasteOnRecycling;
     }
 
     public double getWasteTotal() {
@@ -89,20 +89,20 @@ public class Material {
         this.recycledMaterial = recycledMaterial;
     }
 
-    public double getEnergyMain() {
-        return energyMain;
+    public double getEnergyNeededForMainMaterial() {
+        return energyNeededForMainMaterial;
     }
 
-    public void setEnergyMain(double energyMain) {
-        this.energyMain = energyMain;
+    public void setEnergyNeededForMainMaterial(double energyNeededForMainMaterial) {
+        this.energyNeededForMainMaterial = energyNeededForMainMaterial;
     }
 
-    public double getEnergySecondary() {
-        return energySecondary;
+    public double getEnergyNeededForSecondaryMaterial() {
+        return energyNeededForSecondaryMaterial;
     }
 
-    public void setEnergySecondary(double energySecondary) {
-        this.energySecondary = energySecondary;
+    public void setEnergyNeededForSecondaryMaterial(double energyNeededForSecondaryMaterial) {
+        this.energyNeededForSecondaryMaterial = energyNeededForSecondaryMaterial;
     }
 
     public double getWasteProduction() {
@@ -151,19 +151,22 @@ public class Material {
 
     public double getInputRecycled() {
         return recycledMaterial + recoveredMaterial;
-
     }
 
     public double getFx() {
-        return 0.9/((usefulness/averageUsefulness)*(lifespan/averageLifespan));
+        double a = 0, b = 0;
+        a = usefulness / averageUsefulness;
+        b = lifespan / averageLifespan;
+        if (a * b <= 0)
+            throw new ArithmeticException("The product of the usefulness and lifespan cannot be zero");
+        return 0.9 / (a * b);
     }
 
     public double getLinearFlowIndex() {
-        return (2*virginMaterial-recoveredMaterial)/(2*getMass()+((wasteProduction-wasteOnMaterial)/2));
+        return (2 * virginMaterial - recoveredMaterial) / (2 * getMass() + ((wasteProduction - wasteOnRecycling) / 2));
     }
 
-    public double CircularityIndexP() {
-        return 1-(getLinearFlowIndex()*getFx());
+    public double circularityIndex() {
+        return (1 - (getLinearFlowIndex() * getFx()));
     }
-s
 }
