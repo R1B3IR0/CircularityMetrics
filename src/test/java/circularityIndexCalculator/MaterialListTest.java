@@ -7,6 +7,7 @@ import productsystem.Process;
 import productsystem.UnitType;
 import productsystem.UnitaryProcess;
 
+
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -155,7 +156,7 @@ class MaterialListTest {
     }
 
     @Test
-    void getRecycledWasteProcessNullTest(){;
+    void getRecycledWasteProcessNullTest(){
         MaterialList materialList = new MaterialList(process);
         IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () ->materialList.getRecycledWaste(name,null), "Expected IllegalArgumentException");
 
