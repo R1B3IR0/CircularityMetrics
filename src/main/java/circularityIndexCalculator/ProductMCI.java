@@ -24,10 +24,9 @@ public class ProductMCI {
     public static void productMciTotal(Product product) {
         if (product == null)
             throw new IllegalArgumentException("Product cannot be null");
-        Process process = product.getProcess();
-        CreateMaterials materials = new CreateMaterials(process);
-        materials.getMaterials();
-        mciTotal(materials);
+
+        CreateMaterials createMaterials = new CreateMaterials(product.getProcess());
+        product.setMci(mciTotal(createMaterials));
     }
 
     public static void productListMciTotal(ProductList products) {
