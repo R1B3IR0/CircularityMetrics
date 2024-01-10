@@ -2,28 +2,73 @@ package circularityIndexCalculator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import productsystem.AggregatedProcess;
-import productsystem.Product;
-import productsystem.ProductList;
+import productsystem.*;
 
 import static circularityIndexCalculator.ProductMCI.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 
+
 public class ProductMCITest {
-    private CreateMaterials materials;
-    private Product product;
+    private CreateMaterials materials,materials1;
+    private Product product,product1;
     private AggregatedProcess process;
+    private UnitaryProcess process1;
     private ProductList products;
 
     @BeforeEach
     void setUp() {
         process = new AggregatedProcess("process");
+        process1 = new UnitaryProcess("Processo");
         materials = new CreateMaterials(process);
+        materials = new CreateMaterials(process1);
         product = new Product("produto", process);
+        product1 = new Product("produto", process1);
         products = new ProductList("products");
+
+
     }
 
+    /* @Test
+     public void testProductListMciTotal_validList() {
+         materials.list.add(new Material("m1"));
+         materials.list.add(new Material("m3"));
+         materials.list.get(0).setLifespan(1);
+         materials.list.get(0).setUsefulness(1);
+         materials.list.get(0).setAverageLifespan(1);
+         materials.list.get(0).setAverageUsefulness(1);
+
+         materials.list.get(0).setVirginMaterial(247);
+         materials.list.get(0).setRecycledMaterial(-143.26);
+         materials.list.get(0).setRecoveredMaterial(103.15);
+         materials.list.get(0).setWasteProduction(103.74);
+         materials.list.get(0).setWasteOnRecycling(40.11);
+
+         materials.list.get(0).getLinearFlowIndex();
+         materials.list.get(0).getFx();
+
+         materials.list.get(1).setLifespan(1);
+         materials.list.get(1).setUsefulness(1);
+         materials.list.get(1).setAverageLifespan(1);
+         materials.list.get(1).setAverageUsefulness(1);
+
+         materials.list.get(1).setVirginMaterial(730);
+         materials.list.get(1).setRecycledMaterial(-423.4);
+         materials.list.get(1).setRecoveredMaterial(270.98);
+         materials.list.get(1).setWasteProduction(0.58);
+         materials.list.get(1).setWasteOnRecycling(152.4);
+
+         materials.list.get(1).getLinearFlowIndex();
+         materials.list.get(1).getFx();
+         System.out.println(mciTotal(materials));
+
+         product.setProcess(process1);
+         ProductList productList = new ProductList("teste");
+         productList.addProduct(product1);
+
+         productListMciTotal(productList);
+         assertTrue(MciTotal(materials) != 0 | mciTotal(materials) >= 0, "mciTotal() should return the total MCI of each element on the material List");
+     }*/
     @Test
     void productMciTotalNullTest() {
         // Case 1: productMciTotal() should return the total MCI of a product
@@ -190,5 +235,14 @@ public class ProductMCITest {
 
         assertTrue(mciTotal(materials) >= 0, "mciTotal() should return the total MCI of each element on the material List");
     }
+
+    void MCITotalEqualsZero(){
+        materials.list.add(new Material("m1"));
+        materials.list.add(new Material("m2"));
+
+
+
+    }
+
 
 }
