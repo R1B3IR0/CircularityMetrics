@@ -29,7 +29,7 @@ public class ProductMCITest {
 
     }
 
-    /* @Test
+    /*@Test
      public void testProductListMciTotal_validList() {
          materials.list.add(new Material("m1"));
          materials.list.add(new Material("m3"));
@@ -242,6 +242,63 @@ public class ProductMCITest {
 
 
 
+    }
+@Test
+    void productlistMciTotalforTest(){
+        ProductList productList = new ProductList("lista");
+        UnitaryProcess unitaryProcess = new UnitaryProcess("teste");
+        Product product = new Product("produto",unitaryProcess);
+        productList.addProduct(product);
+        CreateMaterials createMaterials = new CreateMaterials(unitaryProcess);
+        createMaterials.list.add(new Material("m1"));
+        createMaterials.list.add(new Material("m2"));
+        createMaterials.list.add(new Material("m3"));
+        createMaterials.list.get(0).setLifespan(1);
+        createMaterials.list.get(0).setUsefulness(1);
+        createMaterials.list.get(0).setAverageLifespan(1);
+        createMaterials.list.get(0).setAverageUsefulness(1);
+
+        createMaterials.list.get(0).setVirginMaterial(247);
+        createMaterials.list.get(0).setRecycledMaterial(-143.26);
+        createMaterials.list.get(0).setRecoveredMaterial(103.15);
+        createMaterials.list.get(0).setWasteProduction(103.74);
+        createMaterials.list.get(0).setWasteOnRecycling(40.11);
+
+        createMaterials.list.get(0).getLinearFlowIndex();
+        createMaterials.list.get(0).getFx();
+
+        createMaterials.list.get(1).setLifespan(1);
+        createMaterials.list.get(1).setUsefulness(1);
+        createMaterials.list.get(1).setAverageLifespan(1);
+        createMaterials.list.get(1).setAverageUsefulness(1);
+
+        createMaterials.list.get(1).setVirginMaterial(730);
+        createMaterials.list.get(1).setRecycledMaterial(-423.4);
+        createMaterials.list.get(1).setRecoveredMaterial(270.98);
+        createMaterials.list.get(1).setWasteProduction(0.58);
+        createMaterials.list.get(1).setWasteOnRecycling(152.4);
+
+        createMaterials.list.get(1).getLinearFlowIndex();
+        createMaterials.list.get(1).getFx();
+
+        createMaterials.list.get(2).setLifespan(1);
+        createMaterials.list.get(2).setUsefulness(1);
+        createMaterials.list.get(2).setAverageLifespan(1);
+        createMaterials.list.get(2).setAverageUsefulness(1);
+
+        createMaterials.list.get(2).setVirginMaterial(23);
+        createMaterials.list.get(2).setRecycledMaterial(-13.34);
+        createMaterials.list.get(2).setRecoveredMaterial(0);
+        createMaterials.list.get(2).setWasteProduction(9.66);
+        createMaterials.list.get(2).setWasteOnRecycling(9.66);
+
+        createMaterials.list.get(2).getLinearFlowIndex();
+        createMaterials.list.get(2).getFx();
+
+        productListMciTotal(productList);
+        for (Product p :productList.getList()){
+            assertTrue(p.getMci()>=0);
+        }
     }
 
 

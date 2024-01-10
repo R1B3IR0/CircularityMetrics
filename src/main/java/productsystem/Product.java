@@ -4,6 +4,8 @@ public class Product {
     private String name;
     Process process;
 
+    private double mci;
+
     public Product(String name, Process process) {
         this.name = name;
         this.process = process;
@@ -23,5 +25,13 @@ public class Product {
 
     public void setProcess(Process process) {
         this.process = process;
+    }
+
+    public double getMci() {
+        return mci;
+    }
+
+    public void setMci(double mci) {
+        this.mci = mci;
     }
 }
