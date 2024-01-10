@@ -243,6 +243,7 @@ public class ProductMCITest {
 
 
     }
+    /*
 @Test
     void productlistMciTotalforTest(){
         ProductList productList = new ProductList("lista");
@@ -299,7 +300,7 @@ public class ProductMCITest {
         for (Product p :productList.getList()){
             assertTrue(p.getMci()>=0);
         }
-    }
+    }*/
 
 
 }

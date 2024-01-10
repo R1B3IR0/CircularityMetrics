@@ -1,6 +1,7 @@
 package dataPersistance;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import productsystem.AggregatedProcess;
 import productsystem.Product;
@@ -17,7 +18,7 @@ class ImportCsvTest {
     @BeforeEach
     void setUp() {
         filePath = "src/main/resources/CSV/csv.csv";
-        importCsv=new ImportCsv();
+        importCsv=new ImportCsv(filePath);
     }
 
     @Test
@@ -31,7 +32,7 @@ class ImportCsvTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->importCsv.importFlowsFromCSV(null),
                 "Esperava-se que importRowsFromCSV lançasse IllegalArgumentException"
         );
-        assertEquals("FilePath cannot be null", exception.getMessage());
+        assertEquals("filePath cannot be null", exception.getMessage());
     }
 
     @Test
@@ -49,9 +50,9 @@ class ImportCsvTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->importCsv.createProcess(null),
                 "Esperava-se que createProcess lançasse IllegalArgumentException"
         );
-        assertEquals("names cannot be null", exception.getMessage());
+        assertEquals("lista cannot be null", exception.getMessage());
     }
-
+    @Test
     void createUnitaryProcessTest() {
         Product product = importCsv.createProcess(importCsv.getProcessNames());
         if (product.getProcess() instanceof UnitaryProcess) {
@@ -59,7 +60,7 @@ class ImportCsvTest {
             assertTrue(product.getProcess() != null, "createUnitaryProcessTest needs to create a process");
         }
     }
-
+    @Test
     void createUnitaryProcessNullTest(){
         Product product = importCsv.createProcess(importCsv.getProcessNames());
         if(product.getProcess() instanceof UnitaryProcess){
@@ -70,7 +71,7 @@ class ImportCsvTest {
         }
 
     }
-
+@Test
     void createAggregatedProcessTest() {
         Product product = importCsv.createProcess(importCsv.getProcessNames());
         if (product.getProcess() instanceof AggregatedProcess) {
@@ -78,14 +79,14 @@ class ImportCsvTest {
             assertTrue(product.getProcess() != null, "createAggregatedProcessTest needs to create a process");
         }
     }
-
+@Test
     void createAggregatedProcessNullTest(){
         Product product = importCsv.createProcess(importCsv.getProcessNames());
         if(product.getProcess() instanceof AggregatedProcess){
             IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->importCsv.createAggregatedProcess(null),
                     "Esperava-se que createAggregatedProcess lançasse IllegalArgumentException"
             );
-            assertEquals("product cannot be null", exception.getMessage());
+            assertEquals("Product cannot be null", exception.getMessage());
         }
 
     }
