@@ -37,3 +37,6 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+# Ignorar o arquivo docker-compose.yml
+docker-compose.yml
