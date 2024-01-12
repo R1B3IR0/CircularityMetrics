@@ -45,8 +45,8 @@ public class ExportCsv {
             for(Material m : materials){
                 csvPrinter.printRecord(product.getName(),";",m.getNameMaterial(),";", m.getVirginMaterial(),";",m.getRecoveredMaterial(),";",
                         m.getWasteOnRecycling(),";",m.getWasteTotal(),";",m.getWasteRadioactive(),";",m.getRecycledMaterial(),";",m.getEnergyNeededForMainMaterial(),";",
-                        m.getEnergyNeededForSecondaryMaterial(),";",m.getWasteProduction(),";",m.getInputRecycled(),";",m.getMass(),";",m.getAverageLifespan(),";",
-                        m.getAverageUsefulness(),";",m.getFx(),";",m.getLinearFlowIndex(),";",m.circularityIndex(),";",product.getMci());
+                        m.getEnergyNeededForSecondaryMaterial(),";",m.getWasteProduction(),";",m.getInputRecycled(),";",m.getMass(),";",m.getLifespan()/m.getAverageLifespan(),";",
+                        m.getUsefulness()/m.getAverageUsefulness(),";",m.getFx(),";",m.getLinearFlowIndex(),";",m.circularityIndex(),";",product.getMci());
 
             }
 
