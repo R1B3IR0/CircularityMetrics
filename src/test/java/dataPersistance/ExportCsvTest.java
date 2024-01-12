@@ -1,15 +1,11 @@
 package dataPersistance;
 
-import circularityIndexCalculator.Material;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import productsystem.Product;
-import productsystem.UnitaryProcess;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class ExportCsvTest {
     private ExportCsv exportCsv;
@@ -30,7 +26,7 @@ class ExportCsvTest {
         boolean resultado = exportCsv.writeToCsv();
         assertEquals(resultado,true,"writeToCsv deve criar um ficheiro csv");
     }
-@Test
+    @Test
     void writeToCsvFalseTest() {
         boolean resultado = exportCsv.writeToCsv();
         assertFalse(!resultado, "writeToCsv deve criar um ficheiro csv");
