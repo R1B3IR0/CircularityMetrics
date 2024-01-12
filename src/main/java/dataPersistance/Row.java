@@ -6,7 +6,7 @@ public class Row {
     private String product;
 
     @CsvBindByName(column = "Processo")
-    private String processo;
+    private String process;
 
     @CsvBindByName(column = "type")
     private String type;
@@ -15,7 +15,7 @@ public class Row {
     private String flow;
 
     @CsvBindByName(column = "Categoria")
-    private String categoria;
+    private String category;
     @CsvBindByName(column = "Qtd")
     private double quantity;
 
@@ -30,34 +30,34 @@ public class Row {
     }
 
     public String getProduct() {
-        return null;
+        return product;
     }
 
-    public String getProcesso() {
-        return null;
+    public String getProcess() {
+        return process;
     }
 
     public String getType() {
-        return null;
+        return type;
     }
 
     public String getFlow() {
-        return null;
+        return flow;
     }
 
-    public String getCategoria() {
-        return null;
+    public String getCategory() {
+        return category;
     }
 
     public double getQuantity() {
-        return 0;
+        return quantity;
     }
 
     public String getUnity() {
-        return null;
+        return unity;
     }
 
     public double getCost() {
-        return 0;
+        return cost;
     }
 }
