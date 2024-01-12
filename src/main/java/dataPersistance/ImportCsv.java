@@ -42,8 +42,6 @@ public class ImportCsv {
     public List<String> getProcessNames() {
         List<String> names = new ArrayList<>();
         String previous = this.list.get(0).getProcess();
-        names.add(previous);
-
         for(Row r:this.list){
             String current = r.getProcess();
             if (!previous.equals(current)) {
@@ -61,7 +59,7 @@ public class ImportCsv {
         for (String s : lista) {
             count++;
         }
-        if (count > 1) {
+        if (count >= 2) {
             AggregatedProcess ag = new AggregatedProcess("Aggregated");
             for (String s : lista) {
                 UnitaryProcess un = new UnitaryProcess(s);
@@ -83,20 +81,19 @@ public class ImportCsv {
         }
         if (product.getProcess() instanceof UnitaryProcess) {
             for (Row r : this.list) {
-                if (r.getProcess().equals(product.getProcess().getName()) && r.getType().equals("Input")) {
-                    Flow flow = new Flow(r.getFlow(), r.getCategory(), r.getQuantity(), UnitType.valueOf(r.getUnity()), r.getCost());
+                if (r.getProcess().trim().equals(product.getProcess().getName().trim()) && r.getType().equals("Input")) {
+                    Flow flow = new Flow(r.getFlow().trim(), r.getCategory().trim(), r.getQuantity(), UnitType.valueOf(r.getUnity().trim()), r.getCost());
                     ((UnitaryProcess) product.getProcess()).addFlowInput(flow);
+
+
                 } else if (r.getProcess().equals(product.getProcess().getName()) && r.getType().equals("Output")) {
-                    Flow flow = new Flow(r.getFlow(), r.getCategory(), r.getQuantity(), UnitType.valueOf(r.getUnity()), r.getCost());
+                    Flow flow = new Flow(r.getFlow().trim(), r.getCategory().trim(), r.getQuantity(), UnitType.valueOf(r.getUnity().trim()), r.getCost());
                     ((UnitaryProcess) product.getProcess()).addFlowOutput(flow);
                 }
             }
         }
     }
     public void createAggregatedProcess(Product product){
-        if(product == null){
-            throw new IllegalArgumentException("Product cannot be null");
-        }
         if(product.getProcess() instanceof AggregatedProcess){
             for(UnitaryProcess p:((AggregatedProcess) product.getProcess()).getContainer()){
                 for(Row r:this.list){
@@ -115,7 +112,7 @@ public class ImportCsv {
 
     public Product sendProduct(){
         Product product = createProcess(getProcessNames());
-        if(product.getProcess() instanceof UnitaryProcess){
+        if(product.getProcess() instanceof UnitaryProcess ){
             createUnitaryProcess(product);
         }
         else if(product.getProcess() instanceof AggregatedProcess){

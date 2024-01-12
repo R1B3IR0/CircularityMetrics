@@ -28,8 +28,8 @@ class MaterialListTest {
         flow = new Flow("teste","Transport",9,UnitType.unit,10);
         flow1 = new Flow("teste1","Materials",0,UnitType.unit,10);
         flow2 = new Flow("teste2","Recurso",8,UnitType.unit,10);
-        flow3= new Flow("teste","Material Virgem(V)",10,UnitType.unit,10);
-        flow4= new Flow("Material Virgem(V)","Material Virgem(V)",10,UnitType.unit,10);
+        flow3= new Flow("teste","Material virgem (V)",10,UnitType.unit,10);
+        flow4= new Flow("Material virgem (V)","Material virgem (V)",10,UnitType.unit,10);
         name = "teste";
         un = new UnitaryProcess("unitary");
 
@@ -68,7 +68,7 @@ class MaterialListTest {
         un.addFlowOutput(flow4);
         MaterialList materialList = new MaterialList(un);
         double result = materialList.getVirginMaterial(name,un);
-        assertEquals(result ,10, "Material List should be equalt to quanttaty");
+        assertEquals(result ,10, "Material List should be equalt to quantity");
     }
 
     @Test
@@ -268,15 +268,15 @@ class MaterialListTest {
     void getMainEnergyTest(){
         Flow flows;
         Flow flows1;
-        flows= new Flow("teste","Energia necessária para produção das matérias/produtos principais",10,UnitType.unit,10);
-        flows1= new Flow("Energia necessária para produção das matérias/produtos principais","Energia necessária para produção das matérias/produtos principais",10,UnitType.unit,10);
+        flows= new Flow("teste","Energia necessaria para producao das materias/produtos principais",10,UnitType.unit,10);
+        flows1= new Flow("Energia necessaria para producao das materias/produtos principais","Energia necessaria para producao das materias/produtos principais",10,UnitType.unit,10);
 
 
         un.addFlowInput(flows);
         un.addFlowOutput(flows1);
         MaterialList materialList = new MaterialList(un);
         double result = materialList.getMainEnergy(name,un);
-        assertEquals(result ,10, "Material List should be equal to quantat");
+        assertEquals(result ,10, "Material List should be equal to quantity");
     }
 
     @Test
@@ -309,8 +309,8 @@ class MaterialListTest {
     void getSecondaryEnergyTest(){
         Flow flows;
         Flow flows1;
-        flows= new Flow("teste","Energia necessária para produção das matérias/produtos secundário",10,UnitType.unit,10);
-        flows1= new Flow("Energia necessária para produção das matérias/produtos secundário","Energia necessária para produção das matérias/produtos secundário",10,UnitType.unit,10);
+        flows= new Flow("teste","Energia necessaria para producao das materias/produtos secundario",10,UnitType.unit,10);
+        flows1= new Flow("Energia necessaria para producao das materias/produtos secundario","Energia necessaria para producao das materias/produtos secundario",10,UnitType.unit,10);
 
 
         un.addFlowInput(flows);
@@ -350,8 +350,8 @@ class MaterialListTest {
     void getWasteProductionTest(){
         Flow flows;
         Flow flows1;
-        flows= new Flow("teste","Waste na produção de materiais (Wf) - ws",10,UnitType.unit,10);
-        flows1= new Flow("Waste na produção de materiais (Wf) - ws","Waste na produção de materiais (Wf) - ws",10,UnitType.unit,10);
+        flows= new Flow("teste","Waste na producao de materiais (Wf) - ws",10,UnitType.unit,10);
+        flows1= new Flow("Waste na producao de materiais (Wf) - ws","Waste na producao de materiais (Wf) - ws",10,UnitType.unit,10);
 
 
         un.addFlowInput(flows);

@@ -5,7 +5,6 @@ public class Material {
     private double virginMaterial;
     private double recoveredMaterial;
     private double wasteOnRecycling;
-    private double wasteTotal;
     private double wasteRadioactive;
     private double recycledMaterial;
     private double energyNeededForMainMaterial;
@@ -21,16 +20,15 @@ public class Material {
         this.virginMaterial = 0;
         this.recoveredMaterial = 0;
         this.wasteOnRecycling = 0;
-        this.wasteTotal = 0;
         this.wasteRadioactive = 0;
         this.recycledMaterial = 0;
         this.energyNeededForMainMaterial = 0;
         this.energyNeededForSecondaryMaterial = 0;
         this.wasteProduction = 0;
-        this.lifespan = 0;
-        this.usefulness = 0;
-        this.averageUsefulness = 0;
-        this.averageLifespan = 0;
+        this.lifespan = 1;
+        this.usefulness = 1;
+        this.averageUsefulness = 1;
+        this.averageLifespan = 1;
     }
 
     public String getNameMaterial() {
@@ -65,12 +63,9 @@ public class Material {
         this.wasteOnRecycling = wasteOnRecycling;
     }
 
-    public double getWasteTotal() {
-        return wasteTotal;
-    }
 
-    public void setWasteTotal() {
-        this.wasteTotal = virginMaterial - recoveredMaterial;
+    public double getWasteTotal() {
+        return virginMaterial - recoveredMaterial;
     }
 
     public double getWasteRadioactive() {
@@ -150,8 +145,15 @@ public class Material {
     }
 
     public double getInputRecycled() {
-        return recycledMaterial + recoveredMaterial;
-    }
+            double resultado = recycledMaterial + recoveredMaterial;
+
+            if (resultado < 0){
+                return 0;
+            }else {
+                return resultado;
+            }
+
+        }
 
     public double getFx() {
         double a = 0, b = 0;
