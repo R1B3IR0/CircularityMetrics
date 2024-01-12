@@ -35,6 +35,7 @@ class ExportCsvTest {
 
     /*
     @Test
+
     void writeToCsvNullTest() {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> exportCsv.writeToCsv(),
                 "Esperava-se que writeToCsv lançasse NullPointerException"
