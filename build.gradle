@@ -33,8 +33,8 @@ jacoco {
 jacocoTestReport {
     dependsOn test // tests are required to run before generating the report
     reports {
-        xml.enable = false
-        csv.enable =  false
+        xml.required = false
+        csv.required =  false
         html.outputLocation = layout.buildDirectory.dir('./reports/jacoco')
     }
 }
