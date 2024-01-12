@@ -37,8 +37,10 @@ public class MaterialList {
             throw new IllegalArgumentException("Process cannot be null");
         }
         for(int i=0;i<((UnitaryProcess)p).getInput().size();i++){
-            if(((UnitaryProcess) p).getInput().get(i).getFlowName().equals(name) && ((UnitaryProcess) p).getOutput().get(i).getFlowName().equals("Material Virgem(V)")){
+            if(((UnitaryProcess) p).getInput().get(i).getFlowName().equals(name) && ((UnitaryProcess) p).getOutput().get(i).getFlowName().equals("Material virgem (V)")){
+
                 return ((UnitaryProcess) p).getOutput().get(i).getQuantity();
+
             }
         }
         return 0;
@@ -107,7 +109,7 @@ public class MaterialList {
             throw new IllegalArgumentException("Process cannot be null");
         }
         for(int i=0;i<((UnitaryProcess)p).getInput().size();i++){
-            if(((UnitaryProcess) p).getInput().get(i).getFlowName().equals(name) && ((UnitaryProcess) p).getOutput().get(i).getFlowName().equals("Energia necessária para produção das matérias/produtos principais")){
+            if(((UnitaryProcess) p).getInput().get(i).getFlowName().equals(name) && ((UnitaryProcess) p).getOutput().get(i).getFlowName().equals("Energia necessaria para producao das materias/produtos principais")){
                 return ((UnitaryProcess) p).getOutput().get(i).getQuantity();
             }
         }
@@ -121,7 +123,7 @@ public class MaterialList {
             throw new IllegalArgumentException("Process cannot be null");
         }
         for(int i=0;i<((UnitaryProcess)p).getInput().size();i++){
-            if(((UnitaryProcess) p).getInput().get(i).getFlowName().equals(name) && ((UnitaryProcess) p).getOutput().get(i).getFlowName().equals("Energia necessária para produção das matérias/produtos secundário")){
+            if(((UnitaryProcess) p).getInput().get(i).getFlowName().equals(name) && ((UnitaryProcess) p).getOutput().get(i).getFlowName().equals("Energia necessaria para producao das materias/produtos secundario")){
                 return ((UnitaryProcess) p).getOutput().get(i).getQuantity();
             }
         }
@@ -135,7 +137,7 @@ public class MaterialList {
             throw new IllegalArgumentException("Process cannot be null");
         }
         for(int i=0;i<((UnitaryProcess)p).getInput().size();i++){
-            if(((UnitaryProcess) p).getInput().get(i).getFlowName().equals(name) && ((UnitaryProcess) p).getOutput().get(i).getFlowName().equals("Waste na produção de materiais (Wf) - ws")){
+            if(((UnitaryProcess) p).getInput().get(i).getFlowName().equals(name) && ((UnitaryProcess) p).getOutput().get(i).getFlowName().equals("Waste na producao de materiais (Wf) - ws")){
                 return ((UnitaryProcess) p).getOutput().get(i).getQuantity();
             }
         }
