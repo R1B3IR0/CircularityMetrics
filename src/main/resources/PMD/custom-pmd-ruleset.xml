@@ -8,12 +8,28 @@
     <description>
         My custom rules
     </description>
+    <rule ref="category/java/design.xml/CognitiveComplexity">
+        <properties>
+            <property name="reportLevel" value="10"/>
+        </properties>
+    </rule>
+    <rule ref="category/java/design.xml/CyclomaticComplexity">
+        <properties>
+            <property name="classReportLevel" value="80"/>
+            <property name="methodReportLevel" value="10"/>
+            <property name="cycloOptions" value=""/>
+        </properties>
+    </rule>
+    <rule ref="category/java/design.xml/GodClass"/>
 
-
-
-    <rule ref="category/java/design.xml/CognitiveComplexity" />
-    <rule ref="category/java/design.xml/CyclomaticComplexity" />
-    <rule ref="category/java/design.xml/GodClass" />
-    <rule ref="category/java/design.xml/CouplingBetweenObjects" />
-    <rule ref="category/java/design.xml/ExcessiveImports" />
+    <rule ref="category/java/design.xml/CouplingBetweenObjects">
+        <properties>
+            <property name="threshold" value="20"/>
+        </properties>
+    </rule>
+    <rule ref="category/java/design.xml/ExcessiveImports">
+        <properties>
+            <property name="minimum" value="30"/>
+        </properties>
+    </rule>
 </ruleset>

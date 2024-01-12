@@ -14,6 +14,8 @@ repositories {
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'com.opencsv:opencsv:5.5'
+    implementation 'org.apache.commons:commons-csv:1.8'
 }
 
 test {
@@ -29,9 +31,10 @@ jacoco {
 
 
 jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
     reports {
         xml.required = false
-        csv.required = false
+        csv.required =  false
         html.outputLocation = layout.buildDirectory.dir('./reports/jacoco')
     }
 }

@@ -2,12 +2,12 @@ package productsystem;
 
 public class Flow {
     private String flowName;
-    private FlowCategory category;
+    private String category;
     private double quantity;
     private UnitType unit;
     private double cost;
 
-    public Flow(String flowName, FlowCategory category, double quantity, UnitType unit, double cost) {
+    public Flow(String flowName, String category, double quantity, UnitType unit, double cost) {
         this.flowName = flowName;
         this.category = category;
         this.quantity = quantity;
@@ -27,11 +27,11 @@ public class Flow {
         this.flowName= flowName;
     }
 
-    public FlowCategory getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(FlowCategory category) {
+    public void setCategory(String category) {
         this.category= category;
     }
 
