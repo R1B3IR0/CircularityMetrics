@@ -12,9 +12,7 @@ import productsystem.UnitaryProcess;
 public class Main {
     public static void main(String[] args) {
         ImportCsv importCsv = new ImportCsv("src/main/resources/CSV/csv.csv");
-        System.out.println(importCsv.getProcessNames());
         Product product = importCsv.sendProduct();
-        CreateMaterials createMaterials = new CreateMaterials(product.getProcess());
 
         ExportCsv exportCsv = new ExportCsv("src/main/resources/CSV/result.csv",product);
         exportCsv.writeToCsv();

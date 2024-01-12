@@ -94,9 +94,6 @@ public class ImportCsv {
         }
     }
     public void createAggregatedProcess(Product product){
-        if(product == null){
-            throw new IllegalArgumentException("Product cannot be null");
-        }
         if(product.getProcess() instanceof AggregatedProcess){
             for(UnitaryProcess p:((AggregatedProcess) product.getProcess()).getContainer()){
                 for(Row r:this.list){
@@ -115,7 +112,7 @@ public class ImportCsv {
 
     public Product sendProduct(){
         Product product = createProcess(getProcessNames());
-        if(product.getProcess() instanceof UnitaryProcess){
+        if(product.getProcess() instanceof UnitaryProcess ){
             createUnitaryProcess(product);
         }
         else if(product.getProcess() instanceof AggregatedProcess){

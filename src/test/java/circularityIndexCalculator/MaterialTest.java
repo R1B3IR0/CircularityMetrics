@@ -93,10 +93,10 @@ public class MaterialTest {
 
     @Test
     void getValidCircularityIndexTest() {
-        double lifespan = ThreadLocalRandom.current().nextDouble(0.1, Double.MAX_VALUE);
-        double usefulness = ThreadLocalRandom.current().nextDouble(0.1, Double.MAX_VALUE);
-        double averageLifespan = ThreadLocalRandom.current().nextDouble(0.1, Double.MAX_VALUE);
-        double AverageUsefulness = ThreadLocalRandom.current().nextDouble(0.1, Double.MAX_VALUE);
+        double lifespan = 1;
+        double usefulness = 1;
+        double averageLifespan = 1;
+        double AverageUsefulness = 1;
 
         double virginMaterial = 100;
         double recoveredMaterial = 50;
@@ -247,7 +247,7 @@ public class MaterialTest {
 
         m1.setVirginMaterial(virginMaterial);
         m1.setRecoveredMaterial(recoveredMaterial);
-        m1.setWasteTotal();
+        m1.getWasteTotal();
 
         double wasteTotalValue = m1.getWasteTotal();
 

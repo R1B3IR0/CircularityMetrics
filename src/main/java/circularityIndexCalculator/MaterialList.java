@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MaterialList {
-    List<Material> list;
-    Process process;
+    protected List<Material> list;
+    protected Process process;
 
     public MaterialList(Process process) {
         this.process=process;

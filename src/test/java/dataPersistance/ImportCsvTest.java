@@ -67,7 +67,7 @@ class ImportCsvTest {
             IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->importCsv.createUnitaryProcess(null),
                     "Esperava-se que createUnitaryProcess lançasse IllegalArgumentException"
             );
-            assertEquals("product cannot be null", exception.getMessage());
+            assertEquals("Product cannot be null", exception.getMessage());
         }
 
     }
