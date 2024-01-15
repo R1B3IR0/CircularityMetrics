@@ -2,20 +2,33 @@ package circularityIndexCalculator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import productsystem.*;
+import productsystem.AggregatedProcess;
+import productsystem.Product;
+import productsystem.ProductList;
+import productsystem.UnitaryProcess;
 
 import static circularityIndexCalculator.ProductMCI.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-
-
+/**
+ * The test class ProductMCITest.
+ */
 public class ProductMCITest {
+    /** CreateMaterials */
     private CreateMaterials materials,materials1;
+    /** Product */
     private Product product,product1;
+    /** AggregatedProcess */
     private AggregatedProcess process;
+    /** UnitaryProcess */
     private UnitaryProcess process1;
+    /** ProductList */
     private ProductList products;
 
+    /**
+     * Set up the test fixture.
+     * Called before every test case method.
+     */
     @BeforeEach
     void setUp() {
         process = new AggregatedProcess("process");
@@ -25,8 +38,6 @@ public class ProductMCITest {
         product = new Product("produto", process);
         product1 = new Product("produto", process1);
         products = new ProductList("products");
-
-
     }
 
     /*@Test
@@ -69,13 +80,19 @@ public class ProductMCITest {
          productListMciTotal(productList);
          assertTrue(MciTotal(materials) != 0 | mciTotal(materials) >= 0, "mciTotal() should return the total MCI of each element on the material List");
      }*/
+
+    /**
+     * Test the method productMciTotal with a null argument
+     */
     @Test
     void productMciTotalNullTest() {
         // Case 1: productMciTotal() should return the total MCI of a product
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> productMciTotal(null), "productMciTotal() should return the total MCI of a product");
         assertEquals("Product cannot be null", exception.getMessage());
     }
-
+    /**
+     * Test the method productListMciTotal with a null argument
+     */
     @Test
     void productListMciTotalNullTest() {
         // Case 1: productListMciTotal() should do the total MCI of each element on the product List
@@ -239,68 +256,6 @@ public class ProductMCITest {
     void MCITotalEqualsZero(){
         materials.list.add(new Material("m1"));
         materials.list.add(new Material("m2"));
-
-
-
     }
-    /*
-@Test
-    void productlistMciTotalforTest(){
-        ProductList productList = new ProductList("lista");
-        UnitaryProcess unitaryProcess = new UnitaryProcess("teste");
-        Product product = new Product("produto",unitaryProcess);
-        productList.addProduct(product);
-        CreateMaterials createMaterials = new CreateMaterials(unitaryProcess);
-        createMaterials.list.add(new Material("m1"));
-        createMaterials.list.add(new Material("m2"));
-        createMaterials.list.add(new Material("m3"));
-        createMaterials.list.get(0).setLifespan(1);
-        createMaterials.list.get(0).setUsefulness(1);
-        createMaterials.list.get(0).setAverageLifespan(1);
-        createMaterials.list.get(0).setAverageUsefulness(1);
-
-        createMaterials.list.get(0).setVirginMaterial(247);
-        createMaterials.list.get(0).setRecycledMaterial(-143.26);
-        createMaterials.list.get(0).setRecoveredMaterial(103.15);
-        createMaterials.list.get(0).setWasteProduction(103.74);
-        createMaterials.list.get(0).setWasteOnRecycling(40.11);
-
-        createMaterials.list.get(0).getLinearFlowIndex();
-        createMaterials.list.get(0).getFx();
-
-        createMaterials.list.get(1).setLifespan(1);
-        createMaterials.list.get(1).setUsefulness(1);
-        createMaterials.list.get(1).setAverageLifespan(1);
-        createMaterials.list.get(1).setAverageUsefulness(1);
-
-        createMaterials.list.get(1).setVirginMaterial(730);
-        createMaterials.list.get(1).setRecycledMaterial(-423.4);
-        createMaterials.list.get(1).setRecoveredMaterial(270.98);
-        createMaterials.list.get(1).setWasteProduction(0.58);
-        createMaterials.list.get(1).setWasteOnRecycling(152.4);
-
-        createMaterials.list.get(1).getLinearFlowIndex();
-        createMaterials.list.get(1).getFx();
-
-        createMaterials.list.get(2).setLifespan(1);
-        createMaterials.list.get(2).setUsefulness(1);
-        createMaterials.list.get(2).setAverageLifespan(1);
-        createMaterials.list.get(2).setAverageUsefulness(1);
-
-        createMaterials.list.get(2).setVirginMaterial(23);
-        createMaterials.list.get(2).setRecycledMaterial(-13.34);
-        createMaterials.list.get(2).setRecoveredMaterial(0);
-        createMaterials.list.get(2).setWasteProduction(9.66);
-        createMaterials.list.get(2).setWasteOnRecycling(9.66);
-
-        createMaterials.list.get(2).getLinearFlowIndex();
-        createMaterials.list.get(2).getFx();
-
-        productListMciTotal(productList);
-        for (Product p :productList.getList()){
-            assertTrue(p.getMci()>=0);
-        }
-    }*/
-
 
 }

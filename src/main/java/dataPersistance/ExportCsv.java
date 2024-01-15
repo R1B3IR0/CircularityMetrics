@@ -9,23 +9,44 @@ import productsystem.Product;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-
+/**
+ * This class exports the results of the calculations to a csv file
+ */
 public class ExportCsv {
+    /**
+     * Product to be exported
+     */
     private Product product;
+    /**
+     * List of materials of the product
+     */
     private List<Material> materials;
+    /**
+     * Object that creates the list of materials
+     */
     private CreateMaterials createMaterials;
+    /**
+     * Name of the file to be exported
+     */
     private String fileName;
 
+    /**
+     * Constructor
+     * @param filename name of the file to be exported
+     * @param product product to be exported
+     */
     public ExportCsv(String filename, Product product) {
         this.product = product;
         this.createMaterials = new CreateMaterials(this.product.getProcess());
         this.fileName = filename;
     }
 
+    /**
+     * Writes the results of the calculations to a csv file
+     * @return true if the file was successfully written, false otherwise
+     */
     public boolean writeToCsv() {
         if(this.fileName == null)
             throw new IllegalArgumentException("filename cannot be null"

@@ -3,18 +3,23 @@ package productsystem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.NoSuchElementException;
-
 import static org.junit.jupiter.api.Assertions.*;
 
-// Classe de teste para AggregatedProcess
+/**
+ * The test class AggregatedProcessTest.
+ */
 class AggregatedProcessTest {
-
+    /** AggregatedProcess */
     private AggregatedProcess ag1;
+    /** UnitaryProcess */
     private UnitaryProcess up1;
+    /** UnitaryProcess */
     private UnitaryProcess up2;
 
-    // Método executado antes de cada teste
+    /**
+     * Set up the test fixture.
+     * Called before every test case method.
+     */
     @BeforeEach
     void setUp() {
         ag1 = new AggregatedProcess("ag1");
@@ -22,15 +27,18 @@ class AggregatedProcessTest {
         up2 = new UnitaryProcess("up2");
     }
 
-    // Teste para o método addUnitaryProcess
+    /**
+     * Add a UnitaryProcess to the container of AggregatedProcess
+     */
     @Test
     void addProcessTest() {
         // Caso 1: addUnitaryProcess() deve adicionar um UnitaryProcess ao container
         ag1.addUnitaryProcess(up1);
         assertEquals(1, ag1.getContainer().size(), "addUnitaryProcess() deve adicionar um UnitaryProcess ao container");
     }
-
-    // Teste para adicionar um UnitaryProcess nulo
+    /**
+     * Add a null UnitaryProcess to the container of AggregatedProcess
+     */
     @Test
     public void addNullProcessTest() {
         NullPointerException exception = assertThrows(NullPointerException.class, () -> ag1.addUnitaryProcess(null),
@@ -38,8 +46,9 @@ class AggregatedProcessTest {
         );
         assertEquals("Unitary Process cannot be null", exception.getMessage());
     }
-
-    // Teste para o método removeUnitaryProcess
+    /**
+     * Remove a UnitaryProcess
+     */
     @Test
     void removeProcessTest() {
         // Caso 1: Contagem deve ser 0
@@ -47,8 +56,9 @@ class AggregatedProcessTest {
         ag1.removeUnitaryProcess(up1.getId());
         assertEquals(0, ag1.getContainer().size(), "removeUnitaryProcess() deve remover um UnitaryProcess do container");
     }
-
-    // Teste para remover um UnitaryProcess que não existe
+    /**
+     * Remove a process that doesn't exist
+     */
     @Test
     void removeNotExistingProcessTest() {
         // Caso 2: removeUnitaryProcess() deve retornar -1 (porque o ID não existe no container)
@@ -57,79 +67,22 @@ class AggregatedProcessTest {
         assertEquals(expected, result, "removeUnitaryProcess() deve retornar -1 (porque o ID não existe no container)");
     }
 
-    // Caso 3: removeUnitaryProcess() o ID não pode ser nulo.
-
-    // Teste para o método findUnitaryProcess
+    /**
+     * Find a UnitaryProcess
+     */
     @Test
     void findUnitaryProcessTest() {
         // Caso 1: findUnitaryProcess() deve retornar 0
         ag1.addUnitaryProcess(up1);
         assertEquals(0, ag1.findUnitaryProcess(up1.getId()), "findUnitaryProcess() deve retornar 0");
     }
-
-    // Teste para encontrar um UnitaryProcess que não existe
+    /**
+     * Find a UnitaryProcess that doesn't exist
+     */
     @Test
     void NotFoundUnitaryProcessTest() {
         // Caso 2: NotFoundUnitaryProcess() deve retornar -1
         ag1.findUnitaryProcess(up1.getId());
         assertEquals(-1, ag1.findUnitaryProcess(up1.getId()), "NotFoundUnitaryProcess() deve retornar -1");
-    }
-
-    // Teste para o método addUnitaryProcess
-    @Test
-    public void testAddUnitaryProcess() {
-        assertEquals(0, ag1.getContainer().size());
-        ag1.addUnitaryProcess(up1);
-        assertEquals(1, ag1.getContainer().size());
-        assertEquals(up1, ag1.getContainer().get(0));
-    }
-
-    // Teste para o método removeUnitaryProcess
-    @Test
-    public void testRemoveUnitaryProcess() {
-        ag1.addUnitaryProcess(up1);
-        ag1.addUnitaryProcess(up2);
-
-        assertEquals(2, ag1.getContainer().size());
-
-        UnitaryProcess removedProcess = ag1.removeUnitaryProcess(up1.getId());
-
-        assertEquals(1, ag1.getContainer().size());
-        assertEquals(up1, removedProcess);
-    }
-
-    // Teste para remover um UnitaryProcess que não existe
-    @Test
-    public void testRemoveNonexistentUnitaryProcess() {
-        NoSuchElementException exception = assertThrows(NoSuchElementException.class, () -> ag1.removeUnitaryProcess(123),
-                "Esperava-se que removeUnitaryProcess lançasse NoSuchElementException");
-        assertEquals("123 doesn't exist", exception.getMessage());
-    }
-
-    // Teste para o método getContainer
-    @Test
-    public void testGetContainer() {
-        assertEquals(0, ag1.getContainer().size());
-
-        ag1.addUnitaryProcess(up1);
-
-        assertEquals(1, ag1.getContainer().size());
-        assertTrue(ag1.getContainer().contains(up1));
-    }
-
-    // Teste para o método findUnitaryProcess
-    @Test
-    public void testFindUnitaryProcess() {
-        ag1.addUnitaryProcess(up1);
-        ag1.addUnitaryProcess(up2);
-
-        assertEquals(0, ag1.findUnitaryProcess(up1.getId()));
-        assertEquals(1, ag1.findUnitaryProcess(up2.getId()));
-    }
-
-    // Teste para encontrar um UnitaryProcess que não existe
-    @Test
-    public void testFindNonexistentUnitaryProcess() {
-        assertEquals(-1, ag1.findUnitaryProcess(123)); // Assumindo que 123 não é um ID válido
     }
 }

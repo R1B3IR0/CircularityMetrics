@@ -6,11 +6,21 @@ import productsystem.UnitaryProcess;
 
 import java.util.List;
 
+
+/**
+ * This class creates a list of materials from a process
+ */
 public class CreateMaterials extends MaterialList {
     public CreateMaterials(Process process) {
         super(process);
     }
 
+    /**
+     * This method creates a material
+     * @param name
+     * @param p
+     * @return
+     */
     protected Material createMaterial(String name, Process p){
         if(name == null){
             throw new IllegalArgumentException("Name cannot be null");
@@ -32,6 +42,11 @@ public class CreateMaterials extends MaterialList {
         return material;
 
     }
+    /**
+     * This method goes through the list of materials and calls the method createMaterial for each material
+     * @param p
+     * @return
+     */
     protected void createAllMaterial(Process p){
         if(p == null){
             throw new IllegalArgumentException("Process cannot be null");
@@ -48,10 +63,12 @@ public class CreateMaterials extends MaterialList {
             }
         }
     }
+    /**
+     * This method gets the list of materials created using the method createAllMaterial
+     * @return
+     */
     public List<Material> getMaterials(){
         createAllMaterial(this.process);
         return this.list;
     }
-
-
 }

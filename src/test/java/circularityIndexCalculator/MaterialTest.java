@@ -6,15 +6,21 @@ import org.junit.jupiter.api.Test;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * The test class MaterialTest.
+ */
 public class MaterialTest {
+    /** Material */
     private Material m1;
-
+    /** Material */
     @BeforeEach
     void setUp() {
         m1 = new Material("m1");
     }
 
+    /**
+     * Testing the getFx method under normal conditions
+     */
     @Test
     void getValidFxTest() {
         double lifespan = ThreadLocalRandom.current().nextDouble(0.1, Double.MAX_VALUE);
@@ -31,7 +37,9 @@ public class MaterialTest {
         // Case 1: getFx() should return a value greater than zero
         assertTrue(fxValue > 0, "getfX() should return a value greater than zero");
     }
-
+    /**
+     * Testing the getFx method with a zero value
+     */
     @Test
     void getDenominatorZeroFxTest() {
         m1.setLifespan(0); // Configura Lifespan como zero
@@ -44,6 +52,9 @@ public class MaterialTest {
         assertEquals("The product of the usefulness and lifespan cannot be zero", exception.getMessage());
     }
 
+    /**
+     * Testing the LinearFlowIndex method with positive values
+     */
     @Test
     void getValidLinearFlowIndexTest() {
         double virginMaterial = 100;
@@ -72,7 +83,9 @@ public class MaterialTest {
         assertEquals(expectedLinearFlowIndex, linearFlowIndexValue, 0.01,
                 "The calculated LinearFlowIndex should be close to the expected value");
     }
-
+    /**
+     * Testing the LinearFlowIndex method with negative values
+     */
     @Test
     void getNegativeLinearFlowIndexTest() {
         double virginMaterial = 1;
@@ -90,7 +103,9 @@ public class MaterialTest {
         // Verifica se o resultado não é menor que zero
         assertTrue(linearFlowIndexValue < 0, "getLinearFlowIndex() should not return a value less than zero");
     }
-
+    /**
+     * Testing the CircularityIndex method with positive values
+     */
     @Test
     void getValidCircularityIndexTest() {
         double lifespan = 1;
@@ -121,7 +136,10 @@ public class MaterialTest {
                 "getCircularityIndexP() should return a value greater than zero");
 
     }
-
+    /**
+     * Testing the Circularity Index method with getLinearFlowIndex() returning a value less than zero and getFx()
+     * returning a value equal or less than zero
+     */
     @Test
     void getNegativeOrZeroCircularityIndexTest() {
 
@@ -138,10 +156,14 @@ public class MaterialTest {
         m1.getLinearFlowIndex();
         m1.getFx();
 
+
         assertTrue(m1.circularityIndex() <= 0,
                 "getCircularityIndex() should not return a value less or equal than zero");
     }
 
+    /**
+     * Testing the Usefulness method with positive values
+     */
     @Test
     void getValidUsefulnessTest() {
         double usefulness = ThreadLocalRandom.current().nextDouble(0.1, Double.MAX_VALUE);
@@ -156,6 +178,9 @@ public class MaterialTest {
                 "getUsefulness() should return a value greater than zero");
     }
 
+    /**
+     * Testing the Usefulness method with negative values or zero
+     */
     @Test
     void getNegativeOrEqualZeroUsefulnessTest() {
         double usefulness = -10;
@@ -169,7 +194,9 @@ public class MaterialTest {
         assertTrue(usefulnessValue <= 0,
                 "getUsefulness() should not return a value less or equal than zero");
     }
-
+    /**
+     * Testing the Lifespan method with positive values
+     */
     @Test
     void getValidLifeSpan() {
         double lifeSpan = ThreadLocalRandom.current().nextDouble(0.1, Double.MAX_VALUE);
@@ -183,7 +210,9 @@ public class MaterialTest {
         assertTrue(lifeSpanValue > 0,
                 "getLifeSpan() should return a value greater than zero");
     }
-
+    /**
+     * Testing the Lifespan method with negative values or zero
+     */
     @Test
     void getLessOrEqualZeroLifeSpan() {
         double lifeSpan = -10;
@@ -198,6 +227,9 @@ public class MaterialTest {
                 "getLifeSpan() should not return a value less or equal than zero");
     }
 
+    /**
+     * Testing the InputRecycled method with positive values
+     */
     @Test
     void getValidInputRecycled() {
         double recycledMaterial = 5;
@@ -211,13 +243,16 @@ public class MaterialTest {
         assertTrue(inputRecycledValue < 0 | inputRecycledValue > 0,
                 "getInputRecycled() should return a value greater than zero");
     }
-
+    /**
+     * Testing the method getMass with positive values
+     */
     @Test
     void getValidMass() {
         double virginMaterial = 10;
-        double getInputRecycled = 5;
 
         m1.setVirginMaterial(virginMaterial);
+        m1.setRecycledMaterial(3);
+        m1.setRecoveredMaterial(2);
         m1.getInputRecycled();
 
         double massValue = m1.getMass();
@@ -225,21 +260,27 @@ public class MaterialTest {
         assertTrue(massValue > 0,
                 "getMass() should return a value greater than zero");
     }
-
+    /**
+     * Testing the method getMass with negative values or zero
+     */
     @Test
     void getLessOrEqualZeroMass() {
         double virginMaterial = -10;
-        double getInputRecycled = 0;
 
         m1.setVirginMaterial(virginMaterial);
+        m1.setRecycledMaterial(3);
+        m1.setRecoveredMaterial(2);
         m1.getInputRecycled();
+        System.out.println(m1.getMass());
 
         double massValue = m1.getMass();
 
         assertTrue(massValue <= 0,
                 "getMass() should not return a value less or equal than zero");
     }
-
+    /**
+     * Testing the method getWasteTotal with positive values
+     */
     @Test
     void getValidWasteTotal() {
         double virginMaterial = 10;
@@ -254,7 +295,9 @@ public class MaterialTest {
         assertTrue(wasteTotalValue > 0,
                 "getWasteTotal() should return a value greater than zero");
     }
-
+    /**
+     * Testing the method getWasteTotal with negative values or zero
+     */
     @Test
     void getLessOrEqualZeroWasteTotal() {
         double virginMaterial = -10;

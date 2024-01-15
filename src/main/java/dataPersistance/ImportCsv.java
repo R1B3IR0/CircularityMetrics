@@ -11,15 +11,29 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class imports a CSV file and creates a process
+ */
 public class ImportCsv {
+    /** The path of the CSV file */
     private String filePath;
+    /** The list of rows of the CSV file */
     private List<Row> list;
 
+    /**
+     * Constructor of the class
+     * @param filePath the path of the CSV file
+     */
     public ImportCsv(String filePath){
         this.filePath=filePath;
         this.list=importFlowsFromCSV(this.filePath);
     }
 
+    /**
+     * This method imports flows from CSV file
+     * @param filePath the path of the CSV file
+     * @return the list of rows of the CSV file
+     */
     public List<Row> importFlowsFromCSV(String filePath) {
         if(filePath == null){
             throw new IllegalArgumentException("filePath cannot be null");
@@ -39,6 +53,10 @@ public class ImportCsv {
 
         return csvReader.parse();
     }
+    /**
+     * This method returns the list of names that exists in a Row of the CSV file
+     * @return the list of names of the processes
+     */
     public List<String> getProcessNames() {
         List<String> names = new ArrayList<>();
         String previous = this.list.get(0).getProcess();
@@ -51,6 +69,11 @@ public class ImportCsv {
         }
         return names;
     }
+    /**
+     * This method creates a process when importing a CSV file
+     * @param lista the list of names of the processes
+     * @return the process
+     */
     public Product createProcess(List<String> lista) {
         if(lista==null){
             throw new IllegalArgumentException("lista cannot be null");
@@ -75,6 +98,10 @@ public class ImportCsv {
         }
         return null;
     }
+    /**
+     * This method creates a unitary process
+     * @param product the product
+     */
     public void createUnitaryProcess(Product product) {
         if(product == null){
             throw new IllegalArgumentException("Product cannot be null");
@@ -93,6 +120,10 @@ public class ImportCsv {
             }
         }
     }
+    /**
+     * This method creates an aggregated process
+     * @param product the product
+     */
     public void createAggregatedProcess(Product product){
         if(product.getProcess() instanceof AggregatedProcess){
             for(UnitaryProcess p:((AggregatedProcess) product.getProcess()).getContainer()){
@@ -110,6 +141,10 @@ public class ImportCsv {
         }
     }
 
+    /**
+     * This method sends a product with all data.
+     * @return the product
+     */
     public Product sendProduct(){
         Product product = createProcess(getProcessNames());
         if(product.getProcess() instanceof UnitaryProcess ){
