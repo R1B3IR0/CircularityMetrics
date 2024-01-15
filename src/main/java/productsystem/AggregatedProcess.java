@@ -3,14 +3,29 @@ package productsystem;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-//subclasse de Process
+/**
+ * Class to represent an Aggregated Process
+ */
 public class AggregatedProcess extends Process{
-    private List<UnitaryProcess> container;//lista para armazenar Processos Unitários
+    /**
+     * List to store Unitary Processes
+     */
+    private List<UnitaryProcess> container;
+
+    /**
+     * Constructor for Aggregated Process
+     * @param name name of the process
+     */
     public AggregatedProcess(String name) {
         super(name);
         this.container=new ArrayList<>();
     }
-//método para encontrar a posição de um processo pelo seu id
+
+    /**
+     * Method to find the position of a Unitary Process by its id
+     * @param id id of the Unitary Process
+     * @return position of the Unitary Process
+     */
     public int findUnitaryProcess(int id){
         int position = 0;
         for (UnitaryProcess un : this.container) {
@@ -21,7 +36,11 @@ public class AggregatedProcess extends Process{
         }
         return -1; // caso nao encontre retorna -1
     }
-//método para adicionar um Unitary Process
+    /**
+     * Method to add a Unitary Process to the list
+     * @param un Unitary Process to be added
+     * @return the Unitary Process added
+     */
     public UnitaryProcess addUnitaryProcess(UnitaryProcess un){
         if(un == null){
             throw new NullPointerException("Unitary Process cannot be null");
@@ -29,9 +48,13 @@ public class AggregatedProcess extends Process{
         this.container.add(un);
         return un;
     }
-//método para remover um processo
+    /**
+     * Method to remove a Unitary Process from the list by its id
+     * @param id id of the Unitary Process to be removed
+     * @return the Unitary Process removed
+     */
     public UnitaryProcess removeUnitaryProcess(int id){
-        int pos=findUnitaryProcess(id);//encontra a posicao
+        int pos=findUnitaryProcess(id); // find the position of the Unitary Process
         if(pos==-1){
             throw new NoSuchElementException(id + " doesn't exist");
         }
@@ -40,7 +63,10 @@ public class AggregatedProcess extends Process{
 
         return un;//devolve o processo removido
     }
-
+    /**
+     * Method to get the list of Unitary Processes
+     * @return the list of Unitary Processes
+     */
     public List<UnitaryProcess> getContainer() {
         return container;
     }
