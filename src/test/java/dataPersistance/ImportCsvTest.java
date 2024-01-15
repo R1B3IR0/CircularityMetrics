@@ -1,33 +1,49 @@
 package dataPersistance;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import productsystem.*;
+import productsystem.AggregatedProcess;
+import productsystem.Flow;
+import productsystem.Product;
+import productsystem.UnitaryProcess;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * The test class ImportCsvTest.
+ */
 class ImportCsvTest {
-
+    /** ImportCsv */
     private ImportCsv importCsv;
+    /** String of filePath*/
     private String filePath;
+    /** Product */
     private Product product;
+
+    /**
+     * Set up the test fixture.
+     * Called before every test case method.
+     */
     @BeforeEach
     void setUp() {
         filePath = "src/main/resources/CSV/csv.csv";
         importCsv=new ImportCsv(filePath);
         Product product = importCsv.sendProduct();
     }
-
+    /**
+     * Test whether the import of csv lines was successful.
+     */
     @Test
     void importRowsFromCSVTest(){
         List<Row> rows = importCsv.importFlowsFromCSV(filePath);
         assertTrue(rows!=null,"importRowsFromCSVTest cant return null");
     }
 
+    /**
+     * Testing if csv row import was null.
+     */
     @Test
     void importRowsFromCSVNull(){
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->importCsv.importFlowsFromCSV(null),
@@ -36,16 +52,35 @@ class ImportCsvTest {
         assertEquals("filePath cannot be null", exception.getMessage());
     }
 
+    /**
+     * Test if the list of names of the processes is not null.
+     */
     @Test
     void getProcessNamesTest(){
         List<String> names = importCsv.getProcessNames();
         assertTrue(names!=null,"getProcessNamesTest cant return null");
     }
+
+    /**
+     * Test if the list of names of the processes is null.
+     */
     @Test
-    void createProcessTest(){
+    void getProcessNamesNull() {
+        List<String> names = importCsv.getProcessNames();
+        assertFalse(names == null, "getProcessNamesTest can t return a list of names");
+    }
+
+    /**
+     * Test in case the list of names of the processes exists.
+     */
+    @Test
+    void createProcessTest() {
         Product product = importCsv.createProcess(importCsv.getProcessNames());
         assertTrue(product!=null,"createProcess cant return null");
     }
+    /**
+     * Test in case the list of names of the processes is null.
+     */
     @Test
     void createProcessNull(){
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->importCsv.createProcess(null),
@@ -53,6 +88,10 @@ class ImportCsvTest {
         );
         assertEquals("lista cannot be null", exception.getMessage());
     }
+
+    /**
+     * This test checks if the unitary process was created and if the inputs and outputs were imported correctly.
+     */
     @Test
     void createUnitaryProcessTest() {
         Product product = importCsv.createProcess(importCsv.getProcessNames());
@@ -61,6 +100,9 @@ class ImportCsvTest {
             assertTrue(product.getProcess() != null, "createUnitaryProcessTest needs to create a process");
         }
     }
+    /**
+     * This test checks try to create a unitary process with a null value.
+     */
     @Test
     void createUnitaryProcessNullTest(){
         Product product = importCsv.createProcess(importCsv.getProcessNames());
@@ -72,7 +114,10 @@ class ImportCsvTest {
         }
 
     }
-@Test
+    /**
+     * This test checks if the aggregated process was created and if the inputs and outputs were imported correctly.
+     */
+    @Test
     void createAggregatedProcessTest() {
         Product product = importCsv.createProcess(importCsv.getProcessNames());
         if (product.getProcess() instanceof AggregatedProcess) {
@@ -80,7 +125,10 @@ class ImportCsvTest {
             assertTrue(product.getProcess() != null, "createAggregatedProcessTest needs to create a process");
         }
     }
-@Test
+    /**
+     * This test checks try to create an aggregated process with a null value.
+     */
+    @Test
     void createAggregatedProcessNullTest(){
         Product product = importCsv.createProcess(importCsv.getProcessNames());
         if(product.getProcess() instanceof AggregatedProcess){
@@ -92,6 +140,9 @@ class ImportCsvTest {
 
     }
 
+    /**
+     * Coverage of createProcess
+     */
     @Test
     void coverageCreateProcess(){
         int count = 0;
@@ -111,7 +162,9 @@ class ImportCsvTest {
             assertEquals(true,result,"Create process should return Product with UnitaryProcess");
         }
     }
-
+    /**
+     * Coverage of UnitaryProcess
+     */
     @Test
     void coverageUnitaryProcess() {
         List<Flow> inputs = new ArrayList<>();
@@ -141,8 +194,9 @@ class ImportCsvTest {
         assertTrue(inputsB, "Failed Import of flows");
         assertTrue(outputsB, "Failed Import of flows");
     }
-
-
+    /**
+     * Coverage of AggregatedProcess
+     */
     @Test
     void coverageAggregatedProcess() {
         List<Flow> inputs ;
@@ -170,6 +224,4 @@ class ImportCsvTest {
         assertTrue(inputsB, "Failed Import of flows");
         assertTrue(outputsB, "Failed Import of flows");
     }
-
-
 }

@@ -11,17 +11,30 @@ import productsystem.UnitaryProcess;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * The test class MaterialListTest.
+ */
 class MaterialListTest {
+    /** Process */
     private Process process;
+    /** UnitaryProcess */
     private UnitaryProcess un;
+    /** Flow */
     private Flow flow;
+    /** Flow */
     private Flow flow1;
+    /** Flow */
     private Flow flow2;
+    /** Flow */
     private Flow flow3;
+    /** Flow */
     private Flow flow4;
+    /** name */
     private String name;
-
+    /**
+     * Set up the test fixture.
+     * Called before every test case method.
+     */
     @BeforeEach
     void setUp() {
         process = new UnitaryProcess("teste");
@@ -34,7 +47,9 @@ class MaterialListTest {
         un = new UnitaryProcess("unitary");
 
     }
-
+    /**
+     * Test if the material name is in list
+     */
     @Test
     void getMaterialNameTest() {
         un.addFlowInput(flow1);
@@ -45,7 +60,9 @@ class MaterialListTest {
         assertEquals("teste2",result.get(1));
 
     }
-
+    /**
+     * Test null argument in getMaterialName
+     */
     @Test
     void getMaterialNameProcessNullTest(){
         MaterialList materialList = new MaterialList(process);
@@ -62,6 +79,9 @@ class MaterialListTest {
 
     }
 
+    /**
+     * Test a valid argument in getVirginMaterial
+     */
     @Test
     void getVirginMaterialTest(){
         un.addFlowInput(flow3);
@@ -71,6 +91,9 @@ class MaterialListTest {
         assertEquals(result ,10, "Material List should be equalt to quantity");
     }
 
+    /**
+     * Test null process in getVirginMaterial
+     */
     @Test
     void getVirginMaterialProcessNullTest() {
         MaterialList materialList = new MaterialList(process);
@@ -85,6 +108,9 @@ class MaterialListTest {
 
     }
 
+    /**
+     * Test null name in getVirginMaterial
+     */
     @Test
     void getVirginMaterialStringNullTest(){
         MaterialList materialList = new MaterialList(process);
@@ -99,6 +125,9 @@ class MaterialListTest {
 
     }
 
+    /**
+     * Test a valid argument in getRecycledMaterial
+     */
     @Test
     void getRecoveredMaterialTest(){
         Flow flows;
@@ -111,9 +140,11 @@ class MaterialListTest {
         un.addFlowOutput(flows1);
         MaterialList materialList = new MaterialList(un);
         double result = materialList.getRecoveredMaterial(name,un);
-        assertEquals(result ,10, "Material List should be equal to quantaty");
+        assertEquals(result ,10, "Material List should be equal to quantity");
     }
-
+    /**
+     * Test null process in getRecoveredMaterial
+     */
     @Test
     void getRecoveredMaterialProcessNullTest(){
         MaterialList materialList = new MaterialList(process);
@@ -126,7 +157,9 @@ class MaterialListTest {
         }
 
     }
-
+    /**
+     * Test null name and valid process
+     */
     @Test
     void getRecoveredMaterialStringNullTest(){
         MaterialList materialList = new MaterialList(process);
@@ -139,7 +172,9 @@ class MaterialListTest {
         }
 
     }
-
+    /**
+     * Test a valid argument in getRecycledMaterial
+     */
     @Test
     void getRecycledWasteTest(){
         Flow flows;
@@ -152,9 +187,11 @@ class MaterialListTest {
         un.addFlowOutput(flows1);
         MaterialList materialList = new MaterialList(un);
         double result = materialList.getRecycledWaste(name,un);
-        assertEquals(result ,10, "Material List should be equal to quantaty");
+        assertEquals(result ,10, "Material List should be equal to quantity");
     }
-
+    /**
+     * Test null process in getRecycledWaste
+     */
     @Test
     void getRecycledWasteProcessNullTest(){
         MaterialList materialList = new MaterialList(process);
@@ -167,7 +204,9 @@ class MaterialListTest {
         }
 
     }
-
+    /**
+     * Test null name and valid process
+     */
     @Test
     void getRecycledWasteStringNullTest(){
         MaterialList materialList = new MaterialList(process);
@@ -180,7 +219,9 @@ class MaterialListTest {
         }
 
     }
-
+    /**
+     * Test a valid argument in getRadioactiveWaste
+     */
     @Test
     void getRadioactiveWasteTest(){
         Flow flows;
@@ -193,9 +234,11 @@ class MaterialListTest {
         un.addFlowOutput(flows1);
         MaterialList materialList = new MaterialList(un);
         double result = materialList.getRadioactiveWaste(name,un);
-        assertEquals(result ,10, "Material List should be equal to quantaty");
+        assertEquals(result ,10, "Material List should be equal to quantity");
     }
-
+    /**
+     * Test null process but a valid name in getRadioactiveWaste
+     */
     @Test
     void getRadioactiveWasteProcessNullTest(){
         MaterialList materialList = new MaterialList(process);
@@ -208,7 +251,9 @@ class MaterialListTest {
         }
 
     }
-
+    /**
+     * Test null name but a valid process
+     */
     @Test
     void getRadioactiveWasteStringNullTest(){
         MaterialList materialList = new MaterialList(process);
@@ -221,7 +266,9 @@ class MaterialListTest {
         }
 
     }
-
+    /**
+     * Test a valid argument in getRecycledMaterial
+     */
     @Test
     void getRecycledMaterialTest(){
         Flow flows;
@@ -236,7 +283,9 @@ class MaterialListTest {
         double result = materialList.getRecycledMaterial(name,un);
         assertEquals(result ,10, "Material List should be equal to quantat");
     }
-
+    /**
+     * Test null process but a valid name in getRecycledMaterial
+     */
     @Test
     void getRecycledMaterialProcessNullTest(){
         MaterialList materialList = new MaterialList(process);
@@ -249,7 +298,9 @@ class MaterialListTest {
         }
 
     }
-
+    /**
+     * Test null name but a valid process
+     */
     @Test
     void getRecycledMaterialStringNullTest(){
         MaterialList materialList = new MaterialList(process);
@@ -262,8 +313,9 @@ class MaterialListTest {
         }
 
     }
-
-
+    /**
+     * Test a valid argument in getMainEnergy
+     */
     @Test
     void getMainEnergyTest(){
         Flow flows;
@@ -278,7 +330,9 @@ class MaterialListTest {
         double result = materialList.getMainEnergy(name,un);
         assertEquals(result ,10, "Material List should be equal to quantity");
     }
-
+    /**
+     * Test null process and a valid name in getMainEnergy
+     */
     @Test
     void getMainEnergyProcessNullTest(){
         MaterialList materialList = new MaterialList(process);
@@ -291,7 +345,9 @@ class MaterialListTest {
         }
 
     }
-
+    /**
+     * Test null name but a valid process
+     */
     @Test
     void getMainEnergyStringNullTest(){
         MaterialList materialList = new MaterialList(process);
@@ -304,7 +360,9 @@ class MaterialListTest {
         }
 
     }
-
+    /**
+     * Test a valid argument in getSecondaryEnergy
+     */
     @Test
     void getSecondaryEnergyTest(){
         Flow flows;
@@ -317,9 +375,11 @@ class MaterialListTest {
         un.addFlowOutput(flows1);
         MaterialList materialList = new MaterialList(un);
         double result = materialList.getSecondaryEnergy(name,un);
-        assertEquals(result ,10, "Material List should be equal to quantaty");
+        assertEquals(result ,10, "Material List should be equal to quantity");
     }
-
+    /**
+     * Test null process and a valid name in getSecondaryEnergy
+     */
     @Test
     void getgetSecondaryEnergyNullTest(){
         MaterialList materialList = new MaterialList(process);
@@ -332,7 +392,9 @@ class MaterialListTest {
         }
 
     }
-
+    /**
+     * Test null name but a valid process
+     */
     @Test
     void getSecondaryEnergyStringNullTest(){
         MaterialList materialList = new MaterialList(process);
@@ -345,7 +407,9 @@ class MaterialListTest {
         }
 
     }
-
+    /**
+     * Test a valid argument in getWasteProduction
+     */
     @Test
     void getWasteProductionTest(){
         Flow flows;
@@ -358,9 +422,11 @@ class MaterialListTest {
         un.addFlowOutput(flows1);
         MaterialList materialList = new MaterialList(un);
         double result = materialList.getWasteProduction(name,un);
-        assertEquals(result ,10, "Material List should be equal to quantaty");
+        assertEquals(result ,10, "Material List should be equal to quantity");
     }
-
+    /**
+     * Test null process and a valid name in getWasteProduction
+     */
     @Test
     void getWasteProductionNullTest() {
         MaterialList materialList = new MaterialList(process);
@@ -373,7 +439,9 @@ class MaterialListTest {
         }
 
     }
-
+    /**
+     * Test null name but a valid process
+     */
     @Test
     void getWasteProductionStringNullTest(){
         MaterialList materialList = new MaterialList(process);
@@ -387,6 +455,9 @@ class MaterialListTest {
 
 
     }
+    /**
+     * Coverage test
+     */
     @Test
     void TesteCoberturaGetMaterialName(){
         un.addFlowInput(flow);
