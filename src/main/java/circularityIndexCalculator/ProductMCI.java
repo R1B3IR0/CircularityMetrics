@@ -18,7 +18,7 @@ public class ProductMCI {
         double numerator = 0, denominator = 0;
         for (Material material : materials.getMaterials()) {
             numerator += material.getVirginMaterial() * material.circularityIndex();
-            denominator += material.circularityIndex();
+            denominator += material.getMass();
         }
         if (denominator == 0)
             throw new ArithmeticException("The circularity index sum of all materials cannot be zero");
