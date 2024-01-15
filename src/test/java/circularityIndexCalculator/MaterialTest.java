@@ -89,19 +89,18 @@ public class MaterialTest {
     @Test
     void getNegativeLinearFlowIndexTest() {
         double virginMaterial = 1;
-        double recoveredMaterial = 4;
-        double wasteProduction = -1;
+        double recoveredMaterial = 4111;
+        double wasteProduction = 1;
         double wasteOnRecycling = 4;
 
         m1.setVirginMaterial(virginMaterial);
         m1.setRecoveredMaterial(recoveredMaterial);
         m1.setWasteProduction(wasteProduction);
         m1.setWasteOnRecycling(wasteOnRecycling);
+        ArithmeticException Exception = assertThrows(ArithmeticException.class,()
+                ->m1.getLinearFlowIndex(),"LFI cannot be less then 0");
+        assertEquals("LFI cannot be less then 0",Exception.getMessage());
 
-        double linearFlowIndexValue = m1.getLinearFlowIndex();
-
-        // Verifica se o resultado não é menor que zero
-        assertTrue(linearFlowIndexValue < 0, "getLinearFlowIndex() should not return a value less than zero");
     }
     /**
      * Testing the CircularityIndex method with positive values
@@ -157,8 +156,9 @@ public class MaterialTest {
         m1.getFx();
 
 
-        assertTrue(m1.circularityIndex() <= 0,
-                "getCircularityIndex() should not return a value less or equal than zero");
+        ArithmeticException Exception = assertThrows(ArithmeticException.class,()
+                ->m1.circularityIndex(),"Circularity cannot be less or equal to 0 and cannot be greater then 1");
+        assertEquals("Circularity cannot be less or equal to 0 and cannot be greater then 1",Exception.getMessage());
     }
 
     /**
@@ -189,10 +189,9 @@ public class MaterialTest {
         m1.setUsefulness(usefulness);
         m1.setAverageUsefulness(averageUsefulness);
 
-        double usefulnessValue = m1.getUsefulness();
-
-        assertTrue(usefulnessValue <= 0,
-                "getUsefulness() should not return a value less or equal than zero");
+        ArithmeticException Exception = assertThrows(ArithmeticException.class,()
+                ->m1.getUsefulness(),"Usefulness cannot be less or equal to 0");
+        assertEquals("Usefulness cannot be less or equal to 0",Exception.getMessage());
     }
     /**
      * Testing the Lifespan method with positive values
@@ -221,10 +220,9 @@ public class MaterialTest {
         m1.setLifespan(lifeSpan);
         m1.setAverageLifespan(averageLifeSpan);
 
-        double lifeSpanValue = m1.getLifespan();
-
-        assertTrue(lifeSpanValue <= 0,
-                "getLifeSpan() should not return a value less or equal than zero");
+        ArithmeticException Exception = assertThrows(ArithmeticException.class,()
+                ->m1.getLifespan(),"Lifespan cannot be less then 0");
+        assertEquals("Lifespan cannot be less then 0",Exception.getMessage());
     }
 
     /**
@@ -252,13 +250,11 @@ public class MaterialTest {
 
         m1.setVirginMaterial(virginMaterial);
         m1.setRecycledMaterial(3);
-        m1.setRecoveredMaterial(2);
+        m1.setRecoveredMaterial(-2);
         m1.getInputRecycled();
+        assertTrue(m1.getMass() > 0,
+                "getMass() should return a value more than zero");
 
-        double massValue = m1.getMass();
-
-        assertTrue(massValue > 0,
-                "getMass() should return a value greater than zero");
     }
     /**
      * Testing the method getMass with negative values or zero
@@ -271,12 +267,11 @@ public class MaterialTest {
         m1.setRecycledMaterial(3);
         m1.setRecoveredMaterial(2);
         m1.getInputRecycled();
-        System.out.println(m1.getMass());
+        ArithmeticException Exception = assertThrows(ArithmeticException.class,()
+                ->m1.getMass(),"Mass cannot be less or equal to 0");
+        assertEquals("Mass cannot be less or equal to 0",Exception.getMessage());
 
-        double massValue = m1.getMass();
 
-        assertTrue(massValue <= 0,
-                "getMass() should not return a value less or equal than zero");
     }
     /**
      * Testing the method getWasteTotal with positive values
@@ -306,9 +301,9 @@ public class MaterialTest {
         m1.setVirginMaterial(virginMaterial);
         m1.setRecoveredMaterial(recoveredMaterial);
 
-        double wasteTotalValue = m1.getWasteTotal();
 
-        assertTrue(wasteTotalValue <= 0,
-                "getWasteTotal() should not return a value less or equal than zero");
+        ArithmeticException Exception = assertThrows(ArithmeticException.class,()
+                ->m1.getWasteTotal(),"WasteTotal cannot be less then 0");
+        assertEquals("WasteTotal cannot be less then 0",Exception.getMessage());
     }
 }

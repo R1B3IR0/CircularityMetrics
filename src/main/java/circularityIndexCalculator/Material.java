@@ -139,7 +139,14 @@ public class Material {
      * @return
      */
     public double getWasteTotal() {
-        return virginMaterial - recoveredMaterial;
+
+        double resultado = virginMaterial - recoveredMaterial;
+        if(resultado<0){
+            throw new ArithmeticException("WasteTotal cannot be less then 0");
+        }else {
+            return resultado;
+        }
+
     }
     /**
      * Returns the radioactive waste
@@ -216,7 +223,12 @@ public class Material {
      * @return
      */
     public double getLifespan() {
-        return lifespan;
+
+        if(lifespan<0){
+            throw new ArithmeticException("Lifespan cannot be less then 0");
+        }else {
+            return lifespan;
+        }
     }
     /**
      * Sets the lifespan
@@ -230,7 +242,12 @@ public class Material {
      * @return
      */
     public double getUsefulness() {
-        return usefulness;
+
+        if(usefulness<0){
+            throw new ArithmeticException("Usefulness cannot be less or equal to 0");
+        }else {
+            return usefulness;
+        }
     }
     /**
      * Sets the usefulness
@@ -272,21 +289,27 @@ public class Material {
      * @return
      */
     public double getMass() {
-        return virginMaterial + getInputRecycled();
+        double resultado=  virginMaterial + getInputRecycled();
+        if(resultado<0){
+            throw new ArithmeticException("Mass cannot be less or equal to 0");
+        }else {
+            return resultado;
+        }
     }
     /**
      * This method calculates input recycled
      * @return
      */
     public double getInputRecycled() {
-            double resultado = recycledMaterial + recoveredMaterial;
+        double resultado = recycledMaterial + recoveredMaterial;
 
-            if (resultado < 0){
-                return 0;
-            }else {
-                return resultado;
-            }
+        if (resultado < 0){
+            throw new ArithmeticException("InputRecycled cannot be less then 0");
+        }else {
+            return resultado;
         }
+
+    }
     /**
      * This method calculates the utility factor
      * @return
@@ -304,13 +327,23 @@ public class Material {
      * @return
      */
     public double getLinearFlowIndex() {
-        return (2 * virginMaterial - recoveredMaterial) / (2 * getMass() + ((wasteProduction - wasteOnRecycling) / 2));
+        double resultado=(2 * virginMaterial - recoveredMaterial) / (2 * getMass() + ((wasteProduction - wasteOnRecycling) / 2));
+        if(resultado<0){
+            throw new ArithmeticException("LFI cannot be less then 0");
+        }else {
+            return resultado;
+        }
     }
     /**
      * This method calculates the circularity
      * @return
      */
     public double circularityIndex() {
-        return (1 - (getLinearFlowIndex() * getFx()));
+        double resultado=1 - (getLinearFlowIndex() * getFx());
+        if(resultado<=0 || resultado>1){
+            throw new ArithmeticException("Circularity cannot be less or equal to 0 and cannot be greater then 1");
+        }else {
+            return resultado;
+        }
     }
 }
