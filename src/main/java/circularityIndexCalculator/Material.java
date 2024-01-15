@@ -296,6 +296,7 @@ public class Material {
             return resultado;
         }
     }
+
     /**
      * This method calculates input recycled
      * @return
@@ -304,11 +305,10 @@ public class Material {
         double resultado = recycledMaterial + recoveredMaterial;
 
         if (resultado < 0){
-            throw new ArithmeticException("InputRecycled cannot be less then 0");
+            return 0;
         }else {
             return resultado;
         }
-
     }
     /**
      * This method calculates the utility factor

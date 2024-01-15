@@ -22,6 +22,9 @@ public class ProductMCI {
         }
         if (denominator == 0)
             throw new ArithmeticException("The circularity index sum of all materials cannot be zero");
+        if (numerator/denominator < 0 || numerator/denominator > 0)
+            throw new ArithmeticException("Circularity cannot be less or equal to 0 and cannot be greater then 1");
+
         return numerator / denominator;
     }
     /**
