@@ -45,4 +45,4 @@ This project is part of a software engineering course that introduces students t
 ### Installation
 1. Clone the repository:
    ```sh
-   git clone https://github.com/R1B3IR0/Circularity-Software-Engineering.git
+   git clone https://github.com/R1B3IR0/CircularityMetrics.git
